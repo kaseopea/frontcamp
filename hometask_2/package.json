@@ -4,9 +4,9 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
-    "build": "node $NODE_DEBUG_OPTION ./node_modules/.bin/babel ./src/js --source-maps --out-dir ./dist/js",
+    "build": "./node_modules/.bin/babel ./src/js --source-maps --out-dir ./dist/js",
     "watch": "./node_modules/.bin/babel ./src/js --watch --source-maps --out-dir ./dist/js",
-    "babel-plugin-build": "node %NODE_DEBUG_OPTION% ./node_modules/.bin/babel ./babel-plugin-sandbox/src --out-dir ./babel-plugin-sandbox/dist"
+    "babel-plugin-build": "./node_modules/.bin/babel ./babel-plugin-sandbox/src --out-dir ./babel-plugin-sandbox/dist"
   },
   "repository": {
     "type": "git",

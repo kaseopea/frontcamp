@@ -1,14 +1,14 @@
 /* Test examples of env variables use in different cases */
 
-const fileName = process.env.PWD + '/folder/file.txt';
+const fileName = process.env.APPDATA + '/folder/file.txt';
 
-const fileData = fs.readFileSync(process.env.PWD + '/folder/file.txt',{encoding:'utf8'});
+const fileData = fs.readFileSync(process.env.APPDATA + '/folder/file.txt',{encoding:'utf8'});
 
 const CONFIG = {
-    appExe: process.env.PWD + 'coolApp/app.exe'
+    appExe: process.env.APPDATA + 'coolApp/app.exe'
 };
 
-getAppExec(process.env.PWD);
+getAppExec(process.env.APPDATA);
 
 function getAppExec(appData) {
     return appData + 'filename.exe';
