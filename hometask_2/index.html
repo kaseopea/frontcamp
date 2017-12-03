@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News</title>
+
+    <!-- Prefetch external APIs-->
+    <link rel="dns-prefetch" href="//newsapi.org">
+    <link rel="dns-prefetch" href="//icons.better-idea.org">
+    <link rel='dns-prefetch' href='//fonts.googleapis.com'>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,700,900" rel="stylesheet">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+    <div id="sources">
+        <div id="header">
+            <button class="menu-button" onclick="app.toggleMenu()">
+                <img src="src/assets/menu-button.svg" class="icon">
+            </button>
+            
+            <div class="logo" onclick="app.openIndex()">
+                News <span class="logo-alt">Hole</span>
+            </div>
+        </div>
+        <div id="sources-content"></div>
+    </div>
+
+    <div id="main">
+        <div id="loader">
+            <img src="src/assets/loader.svg" class="loader-svg" alt="Loading...">
+        </div>
+        <div id="main-content"></div>
+    </div>
+
+    <div id="footer">
+        <p class="copyright">Special thanks goes to
+            <a href="https://newsapi.org/" target="_blank">NewsAPI</a>
+        </p>
+    </div>
+
+    <!-- Polyfills -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+
+    <!-- App scripts -->
+    <script src="dist/js/newsClient/client_config.js"></script>
+    <script src="dist/js/newsClient/client.js"></script>
+    <script src="dist/js/config.js"></script>
+    <script src="dist/js/controller.js"></script>
+    <script src="dist/js/view.js"></script>
+    <script src="dist/js/app.js"></script>
+    <script src="dist/js/index.js"></script>
+</body>
+
+</html>
