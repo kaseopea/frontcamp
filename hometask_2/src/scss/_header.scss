@@ -38,16 +38,17 @@ body.menu-expanded {
   /* Logo */
   .logo {
     display: block;
-    font-family: "Kanit", Arial, Helvetica, sans-serif;
+    font-family: $accent-font;
     font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: -1px;
     color: $logo-text-color;
     cursor: pointer;
 
     .logo-alt {
       display: inline-block;
-      margin: 0 3px 0 8px;
+      margin: 0 3px 0 0;
       padding: 3px 5px;
       color: $logo-text-color-alt;
     }

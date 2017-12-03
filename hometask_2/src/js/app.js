@@ -15,7 +15,7 @@ class App {
 	  this._initMainMenu();
   }
 
-  /* Load news sources to aside */
+  /* ************ VIEW ACTIONS ************ */
   initNewsSources() {
     newsClient
       .getNewsSources()
@@ -34,8 +34,7 @@ class App {
         );
       });
   }
-
-  /* ************ VIEW ACTIONS ************ */
+  
   openSource(sourceId) {
     if (appView.isMobileView()) {
       appView.hideElement(ELEMENTS.sourcesContent);

@@ -30,7 +30,7 @@ const getNewsHtml = (data) => {
                 <div class="month">${monthNames[date.getMonth()]}</div>
               </div>` : ''}
               <a href="${newsOne.url}" target="_blank">
-                <img class="thumb-pic" src="${newsOne.urlToImage}" alt="${newsOne.title}" />
+                <img class="thumb-pic" src="${newsOne.urlToImage}"/>
               </a>
             </div>
 

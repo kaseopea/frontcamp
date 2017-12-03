@@ -2,8 +2,8 @@
     General styles
  */
 html {
-  background-color: $main-background-color;
-  font-family: "Kanit", Arial, Helvetica, sans-serif;
+  background: $main-background-color url('../assets/bg.png');
+  font-family: $main-font;
   font-size: 16px;
   line-height: 1.25;
   -webkit-font-smoothing: antialiased;

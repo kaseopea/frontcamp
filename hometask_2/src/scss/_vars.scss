@@ -1,6 +1,8 @@
 /** ************************************************************************************************************
     APP Variables
 */
+$main-font: 'Roboto', Arial, Helvetica, sans-serif;;
+$accent-font: 'Montserrat', Arial, Helvetica, sans-serif;
 
 $main-background-color: #f5f7f8;
 $header-height: 85px;
@@ -21,3 +23,5 @@ $error-message-background: #e74c3c;
 $error-message-text: white;
 
 $date-label-background: #c0392b;
+
+$card-scale-factor: 1.05;

@@ -5,8 +5,8 @@
     General styles
  */
 html {
-  background-color: #f5f7f8;
-  font-family: "Kanit", Arial, Helvetica, sans-serif;
+  background: #f5f7f8 url("../assets/bg.png");
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.25;
   -webkit-font-smoothing: antialiased; }
@@ -86,15 +86,16 @@ body.menu-expanded {
   /* Logo */
   .logo {
     display: block;
-    font-family: "Kanit", Arial, Helvetica, sans-serif;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
     font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: -1px;
     color: #e74c3c;
     cursor: pointer; }
     .logo .logo-alt {
       display: inline-block;
-      margin: 0 3px 0 8px;
+      margin: 0 3px 0 0;
       padding: 3px 5px;
       color: yellow; }
 
@@ -112,6 +113,7 @@ body.menu-expanded {
 
 .page-title {
   text-transform: uppercase;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-size: 3rem;
   margin-top: 0;
   margin-bottom: 2rem; }
@@ -245,12 +247,21 @@ body.menu-expanded {
   transition: all 0.1s ease-in; }
   .card:hover {
     top: -2px;
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.05);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.05);
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.05);
+    transition: all 200ms ease-in;
+    transform: scale(1.05); }
 
 .card .card-info {
   padding: 20px;
   /* typography */ }
   .card .card-info .card-info-title {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: 700;
     margin: 0;
@@ -272,7 +283,9 @@ body.menu-expanded {
 
 /* Thumbnail */
 .card .thumb {
-  min-height: 150px; }
+  min-height: 150px;
+  background: url("../assets/default-image.png") no-repeat center center;
+  background-size: cover; }
   .card .thumb a {
     text-decoration: none; }
   .card .thumb .thumb-pic {
@@ -282,7 +295,7 @@ body.menu-expanded {
 /* Date */
 .card .date {
   position: absolute;
-  top: 20px;
+  top: -25px;
   right: 20px;
   background-color: #c0392b;
   color: white;
@@ -290,6 +303,7 @@ body.menu-expanded {
   height: 55px;
   padding: 10px 0 12.5px 0;
   border-radius: 100%;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-weight: 700;
   text-align: center;
   box-sizing: border-box; }
