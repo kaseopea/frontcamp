@@ -35,10 +35,7 @@ class Renderer {
 
   // check if view is mobile
   isMobileView() {
-    return (
-      Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <=
-      MOBILE_BREAKPOINT
-    );
+    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0) <= MOBILE_BREAKPOINT;
   }
 }
 const VIEW = (() => ({

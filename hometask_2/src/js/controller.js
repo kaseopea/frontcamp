@@ -9,7 +9,8 @@ const getSourcesHtml = (data) => {
             </li>`;
 	});
 	return `<ul class="sources-list">${sources.join('')}</ul>`;
-}
+};
+
 const getNewsHtml = (data) => {
   if (!data.length) {
     return;
@@ -44,7 +45,7 @@ const getNewsHtml = (data) => {
         </div>
     </div>`});
 	return `<h2 class="page-title">${sourceTitle}</h2><div class="news-grid clearfix">${news.join('')}</div>`;
-}
+};
 
 const CONTROLLER = (() => ({
 		getSourcesHtml,

@@ -17,7 +17,6 @@ class App {
 
   /* Load news sources to aside */
   initNewsSources() {
-    // Get News Sources
     newsClient
       .getNewsSources()
       .then(data => {
