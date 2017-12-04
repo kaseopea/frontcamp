@@ -1,6 +1,5 @@
 /bower_components/
 /node_modules/
-/dist/
 
 # Babel plugin exclude
 !*/node_modules/babel-plugin-process-env/package.json
