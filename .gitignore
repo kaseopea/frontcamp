@@ -1,14 +1,3 @@
-# Babel plugin exclude
-!*/!hometask_2/node_modules/babel-plugin-process-env/package.json
-!*/!hometask_2/node_modules/babel-plugin-process-env/index.js
-
-# Babel plugin exclude
-!*/!hometask_3/node_modules/babel-plugin-process-env/package.json
-!*/!hometask_3/node_modules/babel-plugin-process-env/index.js
-
-!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/package.json
-!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/index.js
-
 # Created by https://www.gitignore.io/api/node,webstorm,visualstudiocode
 
 ### Node ###
@@ -146,3 +135,12 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/node,webstorm,visualstudiocode
+
+# Babel plugin exclude
+!*/!hometask_2/node_modules/babel-plugin-process-env/package.json
+!*/!hometask_2/node_modules/babel-plugin-process-env/index.js
+!*/!hometask_3/node_modules/babel-plugin-process-env/package.json
+!*/!hometask_3/node_modules/babel-plugin-process-env/index.js
+
+!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/package.json
+!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/index.js
