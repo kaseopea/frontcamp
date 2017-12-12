@@ -4,9 +4,18 @@
 **Mentee - Vitali Rusau**
 
 ## Webpack
+I have 2 separate webpack configs - one for dev and second for prod.
+All source files are placed in ./src folder
+
+commands
+* **start** - starts Webpack with preconfigured webpack-dev-sever
+* **build** - builds project for dev
+* **build-prod** - builds project for production
+
+
+Additional:
 * Used **google-fonts-webpack-plugin** to manage Google Web Fonts and use them locally instead of external resource
-* Used **babel-loader** plugin to use ES6 code features
-* Used preset ENV
+* Used **babel-loader** plugin with preset ENV to use ES6 code features
 
 ## Additional
 Installed **ESLint** (with Aitbnb config) and **jscs**
