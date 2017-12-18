@@ -137,10 +137,10 @@ fabric.properties
 # End of https://www.gitignore.io/api/node,webstorm,visualstudiocode
 
 # Babel plugin exclude
-!*/!hometask_2/node_modules/babel-plugin-process-env/package.json
-!*/!hometask_2/node_modules/babel-plugin-process-env/index.js
-!*/!hometask_3/node_modules/babel-plugin-process-env/package.json
-!*/!hometask_3/node_modules/babel-plugin-process-env/index.js
+!*/node_modules/babel-plugin-process-env/package.json
+!*/node_modules/babel-plugin-process-env/index.js
+!*/node_modules/babel-plugin-process-env/package.json
+!*/node_modules/babel-plugin-process-env/index.js
 
-!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/package.json
-!*/!hometask_3/node_modules/webpack-remove-number-attrs-loader/index.js
+!*/node_modules/webpack-remove-number-attrs-loader/package.json
+!*/node_modules/webpack-remove-number-attrs-loader/index.js
