@@ -73,7 +73,11 @@ export class App {
 
   articleClickHandler (event) {
     event.preventDefault();
-    App.initContentViewer(this.getArticleData(event.target));
+    const contentViewerConfig = this.getArticleData(event.target);
+
+    if (contentViewerConfig) {
+        App.initContentViewer(contentViewerConfig);
+    }
   }
 
   // Mobile Menu Button

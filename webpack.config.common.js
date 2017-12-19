@@ -29,8 +29,7 @@ const GoogleWebFontsPlugin = new GoogleFontsPlugin({
 module.exports = {
   entry: {
     app: './src/js/index.js',
-    vendor: ['babel-polyfill', 'whatwg-fetch'],
-    viewer: './src/js/contentViewer/index.js'
+    vendor: ['babel-polyfill', 'whatwg-fetch']
   },
   output: {
     path: OPTIONS.distPath,
@@ -44,7 +43,14 @@ module.exports = {
       },
       {
         test: /\.scss/,
-        use: extractSASSPlugin.extract(['css-loader', 'sass-loader'])
+        use: extractSASSPlugin.extract([{
+          loader: 'css-loader',
+            options: {
+                minimize: true
+            }
+        }, {
+            loader: 'sass-loader'
+        }])
       },
       {
         test: /\.js$/,

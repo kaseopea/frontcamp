@@ -12,4 +12,6 @@ const DEV_SERVER_CONFIG = {
 config.devServer = DEV_SERVER_CONFIG;
 config.devtool = 'source-map';
 
+/* CSS */
+
 module.exports = config;
