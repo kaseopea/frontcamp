@@ -135,12 +135,3 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/node,webstorm,visualstudiocode
-
-# Babel plugin exclude
-!*/node_modules/babel-plugin-process-env/package.json
-!*/node_modules/babel-plugin-process-env/index.js
-!*/node_modules/babel-plugin-process-env/package.json
-!*/node_modules/babel-plugin-process-env/index.js
-
-!*/node_modules/webpack-remove-number-attrs-loader/package.json
-!*/node_modules/webpack-remove-number-attrs-loader/index.js
