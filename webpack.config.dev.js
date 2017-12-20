@@ -1,3 +1,4 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('./webpack.config.common');
 const OPTIONS = require('./options');
 
@@ -12,6 +13,21 @@ const DEV_SERVER_CONFIG = {
 config.devServer = DEV_SERVER_CONFIG;
 config.devtool = 'source-map';
 
+
 /* CSS */
+const extractSASSPlugin = new ExtractTextPlugin({
+    filename: 'style-[hash].css'
+});
+
+config.module.rules.push({
+    test: /\.scss/,
+    use: extractSASSPlugin.extract([{
+        loader: 'css-loader'
+    }, {
+        loader: 'sass-loader'
+    }])
+});
+
+config.plugins.push(extractSASSPlugin);
 
 module.exports = config;

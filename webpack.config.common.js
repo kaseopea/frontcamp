@@ -1,12 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
 const OPTIONS = require('./options');
 
-/* ---------------------------------- CSS EXTRACT PLUGIN  ---------------------------------- */
-const extractSASSPlugin = new ExtractTextPlugin({
-  filename: 'style.css'
-});
+
 /* ---------------------------------- INDEX PAGE ---------------------------------- */
 const IndexPagePlugin = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -33,24 +29,13 @@ module.exports = {
   },
   output: {
     path: OPTIONS.distPath,
-    filename: '[name].js'
+    filename: '[name]-[hash].js'
   },
   module: {
     rules: [
       {
         test: /\.(html)$/,
         use: 'html-loader',
-      },
-      {
-        test: /\.scss/,
-        use: extractSASSPlugin.extract([{
-          loader: 'css-loader',
-            options: {
-                minimize: true
-            }
-        }, {
-            loader: 'sass-loader'
-        }])
       },
       {
         test: /\.js$/,
@@ -80,5 +65,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [IndexPagePlugin, extractSASSPlugin, GoogleWebFontsPlugin]
+  plugins: [IndexPagePlugin, GoogleWebFontsPlugin]
 };
