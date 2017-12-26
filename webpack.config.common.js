@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OPTIONS = require('./options');
 
@@ -15,18 +14,6 @@ const extractSASSPlugin = new ExtractTextPlugin({
 const IndexPagePlugin = new HtmlWebpackPlugin({
   template: './src/index.html',
   excludeChunks: ['viewer']
-});
-
-/* ---------------------------------- GOOGLE WEB FONTS ---------------------------------- */
-const GoogleWebFontsPlugin = new GoogleFontsPlugin({
-  fonts: [
-    { family: 'Montserrat', variants: ['700', '900'] },
-    { family: 'Roboto', variants: ['400', '700'] }
-  ],
-  name: 'fonts',
-  filename: 'fonts.css',
-  path: 'fonts/',
-  formats: ['woff', 'woff2']
 });
 
 /* ---------------------------------- MAIN CONFIG ---------------------------------- */
@@ -47,18 +34,24 @@ module.exports = {
       },
       {
           test: /\.scss/,
-          use: extractSASSPlugin.extract([{
+          use: extractSASSPlugin.extract([
+            {
               loader: 'css-loader',
               options: {
                   minimize: !IS_DEV_MODE,
                   sourceMap: IS_DEV_MODE
               }
-          }, {
+            },
+            {
+              loader: 'postcss-loader'
+            },
+            {
               loader: 'sass-loader',
               options: {
                   sourceMap: IS_DEV_MODE
               }
-          }])
+            }
+          ])
       },
       {
         test: /\.js$/,
@@ -88,5 +81,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [IndexPagePlugin, extractSASSPlugin, GoogleWebFontsPlugin]
+  plugins: [IndexPagePlugin, extractSASSPlugin]
 };

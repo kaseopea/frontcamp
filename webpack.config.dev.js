@@ -1,7 +1,6 @@
 const config = require('./webpack.config.common');
 const OPTIONS = require('./options');
 
-
 /* DEV SERVER CONFIG */
 config.devServer = {
     contentBase: OPTIONS.distPath,
