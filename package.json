@@ -7,8 +7,8 @@
     "prestart": "cpx \"plugins/**/*\" node_modules",
     "start": "node_modules/.bin/webpack-dev-server --color",
     "clean": "rimraf dist",
-    "build-prod": "cross-env NODE_ENV=production npm run clean && webpack --colors --progress",
-    "build": "cross-env NODE_ENV=development npm run clean && webpack  --colors --progress"
+    "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors --progress",
+    "build": "cross-env NODE_ENV=development npm run clean && cross-env NODE_ENV=development webpack  --colors --progress"
   },
   "repository": {
     "type": "git",
