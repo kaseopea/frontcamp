@@ -1,4 +1,4 @@
-#Task 3 Querying Restaurants Collection
+# Task 3 Querying Restaurants Collection
 
 
 ### 3.1  How many “Chinese” (cuisine) restaurants are in “Queens” (borough)?
@@ -67,7 +67,7 @@ Result:
 
 
 
-#Indexing Restaurants Collection
+# Indexing Restaurants Collection
 ### 4.1 Create an index which will be used by this query and provide proof (from explain() or Compass UI) that the index is indeed used by the winning plan:
 
 db.restaurants.find({ name: "Glorious Food" }).explain('executionStats')
