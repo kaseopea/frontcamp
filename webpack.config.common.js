@@ -71,7 +71,7 @@ module.exports = {
             loader: 'json-loader'
           },
           {
-            loader: 'webpack-remove-number-attrs-loader'
+            loader: './plugins/webpack-remove-number-attrs-loader'
           }
         ]
       },
