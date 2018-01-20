@@ -9,11 +9,58 @@
 * Show result as { "totalPassengers" : 999, "location" : { "state" : "abc", "city" : "xyz" } }
 * */
 
-cursor = db.airlines.aggregate([
+var query = [
     {
-
+        $match: {
+            originCountry: 'United States'
+        }
+    },
+    {
+        $group: {
+            _id: {
+                state: '$originState',
+                city: '$originCity'
+            },
+            passengers: {
+                $max: '$passengers'
+            }
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            state: '$_id.state',
+            city: '$_id.city',
+            maxPassengers: '$passengers'
+        }
+    },
+    {
+        $sort: {
+            'state': 1
+        }
+    },
+    {
+        $group: {
+            _id: '$state',
+            city: {
+                $first: '$city'
+            },
+            maxPassengers: {
+                $max: '$maxPassengers'
+            }
+        }
+    },
+    {
+        $sort: {
+            '_id': 1
+        }
+    },
+    {
+        $limit: 5
     }
-]);
+];
+cursor = db.airlines.aggregate(query);
+
 
 /* Output */
 while (cursor.hasNext()) {
