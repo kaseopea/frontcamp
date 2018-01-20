@@ -1,4 +1,7 @@
 # Created by https://www.gitignore.io/api/node,webstorm,visualstudiocode
+# Exclude for MongoDB Hometask 2
+hometask_4_mongo_2/dump
+hometask_4_mongo_2/7z_x64
 
 ### Node ###
 # Logs
