@@ -16,12 +16,23 @@
 * For you reference the number of messages from phillip.love@enron.co to sladana-anna.kulic@enron.com is 144.
 *
 */
-
-cursor = db.airlines.aggregate([
-    {
-
+cursor = db.enron.find().skip(100).limit(10).forEach(
+    function (email) {
+        var recipients = db.enron.distinct('headers.To', {
+            _id: email._id
+        });
+        var recipientsArr = Object.keys(recipients).map(function (key) { return recipients[key]; });
+        // print(typeof recipients);
+        // print('\n');
+        cursor2 = db.enron.update({
+            _id: email._id
+        }, {
+            $set: {
+                'headers.To': recipientsArr
+            }
+        });
     }
-]);
+);
 
 /* Output */
 while (cursor.hasNext()) {

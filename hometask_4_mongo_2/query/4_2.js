@@ -16,12 +16,14 @@
 * For you reference the number of messages from phillip.love@enron.co to sladana-anna.kulic@enron.com is 144.
 *
 */
-
-cursor = db.airlines.aggregate([
+var query = [
     {
-
+        $match: {
+            headers: 'United States'
+        }
     }
-]);
+];
+cursor = db.enron.aggregate(query);
 
 /* Output */
 while (cursor.hasNext()) {
