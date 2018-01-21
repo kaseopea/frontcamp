@@ -19,23 +19,37 @@
 cursor = db.getCollection('enron').aggregate([
     {
         $unwind: '$headers.To'
-    },
+    } ,
     {
         $group: {
             _id: '$_id',
-            from : {
-                $first: '$headers.From'
-            },
-            to: {
+            'mailTo': {
                 $addToSet: '$headers.To'
+            },
+            'mailFrom' : {
+                $first: '$headers.From'
             }
         }
     },
     {
-        $unwind: '$to'
+        $unwind: '$mailTo'
     },
     {
-        $limit: 100
+        $group: {
+            _id: {
+                from: '$mailFrom',
+                to : '$mailTo'
+            },
+            count: { $sum: 1 }
+        }
+    },
+    {
+        $sort: {
+            'count' : -1
+        }
+    },
+    {
+        $limit: 1
     }
 ]);
 
