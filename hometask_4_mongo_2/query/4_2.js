@@ -23,7 +23,7 @@ var query = [
         }
     }
 ];
-cursor = db.enron.aggregate(query);
+cursor = db.getCollection('enron').aggregate(query);
 
 /* Output */
 while (cursor.hasNext()) {

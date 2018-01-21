@@ -38,7 +38,7 @@ var query = [
         $limit : 7
     }
 ];
-cursor = db.airlines.aggregate(query);
+cursor = db.getCollection('airlines').aggregate(query);
 
 /* Output */
 while (cursor.hasNext()) {

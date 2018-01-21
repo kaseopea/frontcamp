@@ -6,7 +6,7 @@
 /*
 * 1. How many records does each airline class have? Use $project to show result as { class: "Z", total: 999 }
 * */
-cursor = db.airlines.aggregate([
+cursor = db.getCollection('airlines').aggregate([
     {
         $group: {
             _id: '$class',

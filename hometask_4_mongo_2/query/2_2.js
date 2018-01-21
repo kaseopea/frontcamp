@@ -42,7 +42,7 @@ var query = [
 ];
 
 /* Output 1*/
-cursor = db.airlines.aggregate(query);
+cursor = db.getCollection('airlines').aggregate(query);
 while (cursor.hasNext()) {
     printjson(cursor.next());
 }
