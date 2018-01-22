@@ -22,7 +22,7 @@ var query = [
         $group: {
             _id: '$carrier',
             total: {
-                $max: '$passengers'
+                $sum: '$passengers'
             }
         }
     },
