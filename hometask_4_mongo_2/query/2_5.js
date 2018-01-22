@@ -21,9 +21,7 @@ var query = [
                 state: '$originState',
                 city: '$originCity'
             },
-            passengers: {
-                $max: '$passengers'
-            }
+            passengers: {$sum: '$passengers'}
         }
     },
     {
@@ -31,23 +29,20 @@ var query = [
             _id: 0,
             state: '$_id.state',
             city: '$_id.city',
-            maxPassengers: '$passengers'
+            totalPassengers: '$passengers'
         }
     },
     {
         $sort: {
-            'state': 1
+            'state': 1,
+            'totalPassengers': -1
         }
     },
     {
         $group: {
             _id: '$state',
-            city: {
-                $first: '$city'
-            },
-            maxPassengers: {
-                $max: '$maxPassengers'
-            }
+            city: { $first: '$city'},
+            totalPassengers: { $max: '$totalPassengers'}
         }
     },
     {
@@ -56,9 +51,20 @@ var query = [
         }
     },
     {
+        $project: {
+            _id: 0,
+            'location': {
+                state: '$_id',
+                city : "$city",
+            },
+            totalPassengers: '$totalPassengers'
+        }
+    },
+    {
         $limit: 5
     }
 ];
+
 cursor = db.getCollection('airlines').aggregate(query);
 
 
