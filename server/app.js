@@ -1,10 +1,22 @@
 const express = require('express');
-const config = require('./config.json');
-const jsonMockData = require('./mockData.json');
+const router = require('./router');
+const appConfig = require('./config.json');
+const path = require('path');
 const app = express();
 
-app.all('*', (req, res) => {
-    res.json(jsonMockData);
+/* Setting Express View Engine (PUG by default) */
+app.set('view engine', 'pug');
+
+/* Setting alternative views directory */
+app.set('views', path.join(__dirname, '/views'));
+
+/* Add router */
+app.use('/', router);
+
+/* uncaughtException error handling */
+process.on('uncaughtException', function (err) {
+    console.log(err);
 });
 
-app.listen(config.appPort, () => console.log(`Amazing app listening on port ${config.appPort}!`));
+/* Server */
+app.listen(appConfig.appPort, () => console.log(`${appConfig.appName} listening on port ${appConfig.appPort}!`));
