@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const appConfig = require('./config.json');
 const pjson = require('../package.json');
+const log = require('./logger');
+
 const routerConfig = {
     status: {
         notFound: 404
@@ -21,23 +23,24 @@ const defaultRoute = {
     }
 };
 
+
 /* Route /blogs | GET/POST Methods */
 router.route('/blogs').all((req, res) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
             message = `${routerConfig.methods.get} method`;
-            console.log(message);
+            log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.post:
             message = `${routerConfig.methods.post} method`;
-            console.log(message);
+            log().info(message);
             res.send(message);
             break;
         default:
             message = `${req.method} method is restricted for this route`;
-            console.log(message);
+            log().info(message);
             res.sendStatus(routerConfig.status.notFound);
             break;
     }
@@ -50,22 +53,22 @@ router.route('/blogs/:id').all((req, res) => {
     switch (req.method) {
         case routerConfig.methods.get :
             message = `${routerConfig.methods.get} method | Id: ${id}`;
-            console.log(message);
+            log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.put:
             message = `${routerConfig.methods.put} method | Id: ${id}`;
-            console.log(message);
+            log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.delete:
             message = `${routerConfig.methods.delete} method | Id: ${id}`;
-            console.log(message);
+            log().info(message);
             res.send(message);
             break;
         default:
             message = `${req.method} method is restricted for this route`;
-            console.log(message);
+            log().info(message);
             res.sendStatus(routerConfig.status.notFound);
             break;
     }
