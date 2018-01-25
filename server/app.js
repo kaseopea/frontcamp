@@ -3,7 +3,7 @@ const config = require('./config.json');
 const jsonMockData = require('./mockData.json');
 const app = express();
 
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
     res.json(jsonMockData);
 });
 
