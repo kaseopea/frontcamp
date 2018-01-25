@@ -5,9 +5,6 @@ const pjson = require('../package.json');
 const log = require('./logger');
 
 const routerConfig = {
-    status: {
-        notFound: 404
-    },
     methods: {
         get: 'GET',
         post: 'POST',
@@ -29,19 +26,19 @@ router.route('/blogs').all((req, res) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
-            message = `${routerConfig.methods.get} method`;
+            message = `${routerConfig.methods.get} method | Url: $\{req.originalUrl}`;
             log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.post:
-            message = `${routerConfig.methods.post} method`;
+            message = `${routerConfig.methods.post} method | Url: $\{req.originalUrl}`;
             log().info(message);
             res.send(message);
             break;
         default:
-            message = `${req.method} method is restricted for this route`;
+            message = `${req.method} method is restricted for this route  | Url: $\{req.originalUrl}`;
             log().info(message);
-            res.sendStatus(routerConfig.status.notFound);
+            renderDefaultTemplate(res);
             break;
     }
 });
@@ -52,31 +49,37 @@ router.route('/blogs/:id').all((req, res) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
-            message = `${routerConfig.methods.get} method | Id: ${id}`;
+            message = `${routerConfig.methods.get} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.put:
-            message = `${routerConfig.methods.put} method | Id: ${id}`;
+            message = `${routerConfig.methods.put} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
             res.send(message);
             break;
         case routerConfig.methods.delete:
-            message = `${routerConfig.methods.delete} method | Id: ${id}`;
+            message = `${routerConfig.methods.delete} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
             res.send(message);
             break;
         default:
-            message = `${req.method} method is restricted for this route`;
+            message = `${req.method} method is restricted for this route | Url: $\{req.originalUrl}`;
             log().info(message);
-            res.sendStatus(routerConfig.status.notFound);
+            renderDefaultTemplate(res);
             break;
     }
 });
 
 /* Default routes */
 router.route(['/', '*']).get((req, res) => {
-    res.render(defaultRoute.templateName, defaultRoute.data);
+    log().info(`Url: ${req.originalUrl}`);
+    renderDefaultTemplate(res);
 });
+
+//
+function renderDefaultTemplate(res) {
+    return res.render(defaultRoute.templateName, defaultRoute.data);
+}
 
 module.exports = router;
