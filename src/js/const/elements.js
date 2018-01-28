@@ -9,4 +9,3 @@ export const ELEMENTS = {
   menuExpandedClass: 'menu-expanded',
   testButton: document.getElementById('test-button')
 };
-
