@@ -1,5 +1,5 @@
 import {APP_CONFIG} from './const/appConfig';
-import {NewsAPIClientProxy} from './model/newsAPI/clientProxy';
+import {NewsAPIClientAdapter} from "./model/newsAPI/clientAdapter";
 
 class ClientConfig {
     constructor(config) {
@@ -17,8 +17,7 @@ export class NewsModelFactory {
     create(provider) {
         // If we use NewsAPI Default Provider
         if (provider === this.clientParams.provider) {
-            const clientProxy = new NewsAPIClientProxy(this.clientParams);
-            return clientProxy.createClient();
+            return new NewsAPIClientAdapter(this.clientParams);
         }
 
         return {};

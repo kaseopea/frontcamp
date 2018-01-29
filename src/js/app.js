@@ -10,8 +10,6 @@ import {ViewFacade} from './viewFacade';
 import {Controller} from './controller';
 import {NewsModelFactory} from './model';
 
-import {ELEMENTS} from './const/elements';
-
 export class App {
     constructor() {
         if (typeof App.instance === 'object') {

@@ -31,7 +31,7 @@ export class Controller {
     /* SOURCES */
     initNewsSources() {
         this.model
-            .getNewsSources()
+            .loadNewsSources()
             .then((data) => {
                 // render content
                 this.view.renderSourcesContent(templateSources({data}));
