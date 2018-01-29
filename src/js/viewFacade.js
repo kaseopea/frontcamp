@@ -36,4 +36,24 @@ export class ViewFacade {
         }
     }
 
+    toggleElementWithClassnameToBody(element, className) {
+        if (this.isHidden(element)) {
+            this.viewRenderer.showElement(element);
+            this.viewRenderer.addClass(document.body, className);
+        } else {
+            this.viewRenderer.hideElement(element);
+            this.viewRenderer.removeClass(document.body, className);
+        }
+    }
+
+    /* UTILS */
+    showElement = (element) => this.viewRenderer.showElement(element);
+    hideElement = (element) => this.viewRenderer.hideElement(element);
+
+    isMobileView = () => this.viewRenderer.isMobileView();
+    isHidden = (element) => this.viewRenderer.isHidden(element);
+
+    addClass = (element, className) => this.viewRenderer.addClass(element, className);
+    removeClass = (element, className) => this.viewRenderer.removeClass(element, className);
+
 }

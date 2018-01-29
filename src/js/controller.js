@@ -11,6 +11,21 @@ export class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
+        this.activeNews = null;
+        this.init();
+        this.initEvents();
+    }
+    init() {
+        this.initNewsSources();
+        this.loadDefaultNews();
+    }
+    initEvents() {
+        this.initMainMenu();
+        this.initResizeEventListener();
+
+        ELEMENTS.logo.addEventListener('click', this.loadDefaultNews.bind(this));
+        ELEMENTS.mainContent.addEventListener('click', this.articleClickHandler.bind(this));
+        ELEMENTS.menuButton.addEventListener('click', this.toggleMenu.bind(this));
     }
 
     /* SOURCES */
@@ -38,14 +53,15 @@ export class Controller {
 
     /* NEWS */
     loadDefaultNews() {
+        const that = this;
         // prepare content view to load data
         this.view.prepareContentForLoading();
 
         // ask model to load default set of news
         this.model.loadDefaultNews()
             .then((data) => {
-                // decide what to do with activeNews variable
-                // that.activeNews = data;
+                // save data as active news
+                that.activeNews = data;
 
                 // save source title
                 const {source: {name: sourceTitle = ''}} = data[0];
@@ -69,16 +85,17 @@ export class Controller {
 
     loadNewsBySourceId(sourceId) {
         const that = this;
-        this.view.viewRenderer.removeClass(document.body, ELEMENTS.menuExpandedClass);
+        this.view.removeClass(document.body, ELEMENTS.menuExpandedClass);
         this.model
             .getNewsByParam('sources', sourceId)
             .then((data) => {
-                //???
+                // save data as active news
                 that.activeNews = data;
 
                 // save source title
                 const {source: {name: sourceTitle = ''}} = data[0];
 
+                // render data
                 this.view.renderContent(templateNews({
                     data,
                     sourceTitle,
@@ -96,6 +113,38 @@ export class Controller {
     }
 
 
+    /* General */
+    articleClickHandler(event) {
+        event.preventDefault();
+        const contentViewerConfig = this.getArticleData(event.target);
+
+        if (contentViewerConfig) {
+            Controller.initContentViewer(contentViewerConfig);
+        }
+    }
+
+    initMainMenu() {
+        if (this.view.isMobileView() && !this.view.isHidden(ELEMENTS.sourcesContent)) {
+            this.view.addClass(document.body, ELEMENTS.menuExpandedClass);
+        }
+    }
+
+    initResizeEventListener() {
+        window.addEventListener('resize', () => {
+            if (this.view.isMobileView()) {
+                this.view.hideElement(ELEMENTS.sourcesContent);
+                this.view.removeClass(document.body, ELEMENTS.menuExpandedClass);
+            } else {
+                this.view.showElement(ELEMENTS.sourcesContent);
+            }
+        });
+    }
+
+    // Mobile Menu Button
+    toggleMenu() {
+        this.view.toggleElementWithClassnameToBody(ELEMENTS.sourcesContent, ELEMENTS.menuExpandedClass);
+    }
+
     /* UTILS */
     openSource(sourceId) {
         this.view.hideForMobileView(ELEMENTS.sourcesContent);
@@ -104,8 +153,35 @@ export class Controller {
             // prepare content view to load data
             this.view.prepareContentForLoading();
 
+            // load source by id
             this.loadNewsBySourceId(sourceId);
         }
+    }
+
+    getArticleData(element) {
+        let output = null;
+        if (element && element.dataset && element.dataset.articleId) {
+            const newsId = parseInt(element.dataset.articleId, 10);
+            if (this.activeNews) {
+                const activeArticle = this.activeNews.filter(news => news.id === newsId);
+                output = {
+                    title: activeArticle[0].title,
+                    url: activeArticle[0].url
+                }
+            }
+        } else {
+            output = (element.parentNode) ? this.getArticleData(element.parentNode) : null;
+        }
+
+        return output;
+    }
+
+    static initContentViewer(config) {
+        require.ensure(['./contentViewer'], (require) => {
+            const cv = require('./contentViewer');
+            const cViewer = new cv.ContentViewer(config);
+            return cViewer;
+        });
     }
 
 }
