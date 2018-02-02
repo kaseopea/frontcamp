@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const appConfig = require('../../config.json');
+const messages = require('../../messages');
 
 /* Connection */
 mongoose.connect(appConfig.db.posts.connection);
@@ -13,27 +14,37 @@ class PostService {
     }
 
     getAllPosts() {
-        return 'getting all posts';
+        // return new Promise((resolve, reject) => this.model.find({}, (err, posts) => (err) ? reject(err) : resolve(posts)));
+        return new Promise((resolve, reject) => {
+            return this.model.find({}, (err, posts) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                return resolve(posts);
+            });
+        });
     }
 
     getPostById(postId) {
-        return `Get post by id [${postId}]`;
+        console.log(`Get post by id [${postId}]`);
     }
 
-    addPost(postConfig) {
-        this.model.create(postConfig, (err) => {
-            if (err) return handleError(err);
-        });
-
-        return `Adding post with config [${postConfig}]`;
+    addPost(postData) {
+        return new Promise((resolve, reject) => this.model.create(postData, (err, post) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(post);
+        }));
     }
 
     updatePost(id, postConfig) {
-        return `Updating post [${id}] with config [${postConfig}]`;
+        console.log(`Updating post [${id}] with config [${postConfig}]`);
     }
 
     deletePost(postId) {
-        return `Deleting post with id [${postId}]`;
+        console.log(`Deleting post with id [${postId}]`);
     }
 }
 

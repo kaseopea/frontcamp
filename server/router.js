@@ -4,6 +4,8 @@ const appConfig = require('./config.json');
 const pjson = require('../package.json');
 const log = require('./logger');
 const postService = require('./src/posts/postService');
+const mockUtils = require('./mockData/mockUtils');
+const messages = ('./messages');
 
 const routerConfig = {
     methods: {
@@ -27,23 +29,39 @@ router.route('/blogs').all((req, res) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
-            message = `${routerConfig.methods.get} method | Url: $\{req.originalUrl}`;
+            message = `${routerConfig.methods.get} method | Url: ${req.originalUrl}`;
             log().info(message);
 
-            postService.getAllPosts();
-
-            res.send(message);
+            postService.getAllPosts()
+                .then((data) => {
+                    // logging successfully created user
+                    log().info(`Returned ${data.length} posts`);
+                    res.send(data);
+                })
+                .catch(err => {
+                    // logging error creating user
+                    log().error(messages.getAllPostsError);
+                    res.send(err);
+                });
             break;
         case routerConfig.methods.post:
-            message = `${routerConfig.methods.post} method | Url: $\{req.originalUrl}`;
-            log().info(message);
+            const randomPost = mockUtils.getRandomPostData();
 
-            postService.addPost();
-
-            res.send(message);
+            // add random mock post with postService
+            postService.addPost(randomPost)
+                .then((data) => {
+                    // logging successfully created user
+                    log().info(`${data.message} ${routerConfig.methods.post} method | Url: ${req.originalUrl}`);
+                    res.send(data);
+                })
+                .catch(err => {
+                    // logging error creating user
+                    log().error(messages.addPostErrorMessage);
+                    res.send(err);
+                });
             break;
         default:
-            message = `${req.method} method is restricted for this route  | Url: $\{req.originalUrl}`;
+            message = `${req.method} method is restricted for this route  | Url: ${req.originalUrl}`;
             log().info(message);
             renderDefaultTemplate(res);
             break;
@@ -93,7 +111,7 @@ router.route(['/', '*']).get((req, res) => {
     renderDefaultTemplate(res);
 });
 
-//
+// UTILS
 function renderDefaultTemplate(res) {
     return res.render(defaultRoute.templateName, defaultRoute.data);
 }

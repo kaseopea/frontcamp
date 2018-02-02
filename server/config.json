@@ -5,10 +5,14 @@
   "db": {
     "prefix": "rusau_",
     "posts": {
-      "connection": "mongodb://localhost/rusau_posts"
+      "modelName": "post",
+      "collectionName": "posts",
+      "connection": "mongodb://localhost/rusau_blogs"
     },
     "users": {
-      "connection": "mongodb://localhost/rusau_users"
+      "modelName": "user",
+      "collectionName": "users",
+      "connection": "mongodb://localhost/rusau_blogs"
     }
   }
 }

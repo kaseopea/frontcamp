@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const modelName = 'post';
+const appConfig = require('../../config.json');
 
 const PostSchema = new mongoose.Schema({
     title: {
@@ -21,4 +20,6 @@ const PostSchema = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model(modelName, PostSchema);
+const Post = mongoose.model(appConfig.db.posts.modelName, PostSchema, appConfig.db.posts.collectionName);
+
+module.exports = Post;
