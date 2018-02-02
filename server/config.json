@@ -1,5 +1,14 @@
 {
   "appName": "Amazing app",
   "appPort": 8080,
-  "logFilename": "route-access.log"
+  "logFilename": "route-access.log",
+  "db": {
+    "prefix": "rusau_",
+    "posts": {
+      "connection": "mongodb://localhost/rusau_posts"
+    },
+    "users": {
+      "connection": "mongodb://localhost/rusau_users"
+    }
+  }
 }

@@ -14,9 +14,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use('/', router);
 
 /* uncaughtException error handling */
-process.on('uncaughtException', function (err) {
-    console.log(err);
-});
+process.on('uncaughtException', (err) => console.log(err));
 
 /* Server */
 app.listen(appConfig.appPort, () => console.log(`${appConfig.appName} listening on port ${appConfig.appPort}!`));

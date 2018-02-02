@@ -3,6 +3,7 @@ const router = express.Router();
 const appConfig = require('./config.json');
 const pjson = require('../package.json');
 const log = require('./logger');
+const postService = require('./src/posts/postService');
 
 const routerConfig = {
     methods: {
@@ -28,11 +29,17 @@ router.route('/blogs').all((req, res) => {
         case routerConfig.methods.get :
             message = `${routerConfig.methods.get} method | Url: $\{req.originalUrl}`;
             log().info(message);
+
+            postService.getAllPosts();
+
             res.send(message);
             break;
         case routerConfig.methods.post:
             message = `${routerConfig.methods.post} method | Url: $\{req.originalUrl}`;
             log().info(message);
+
+            postService.addPost();
+
             res.send(message);
             break;
         default:
@@ -51,16 +58,25 @@ router.route('/blogs/:id').all((req, res) => {
         case routerConfig.methods.get :
             message = `${routerConfig.methods.get} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
+
+            postService.getPostById(id);
+
             res.send(message);
             break;
         case routerConfig.methods.put:
             message = `${routerConfig.methods.put} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
+
+            postService.updatePost(id, {});
+
             res.send(message);
             break;
         case routerConfig.methods.delete:
             message = `${routerConfig.methods.delete} method | Id: ${id} | Url: ${req.originalUrl}`;
             log().info(message);
+
+            postService.deletePost(id);
+
             res.send(message);
             break;
         default:
