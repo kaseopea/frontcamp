@@ -6,5 +6,7 @@ module.exports = {
     updatePostSuccess: 'Updated with success',
     updatePostError: 'Error updating post',
     deletePostSuccess: 'Post deleted with success',
-    deletePostError: 'We have troubles deleting document'
+    deletePostError: 'We have troubles deleting document',
+    postServiceDbConnectSuccess: 'Connection to Post DB was succesful',
+    userServiceDbConnectSuccess: 'Connection to User DB was succesful'
 };
