@@ -23,6 +23,10 @@ const defaultRoute = {
     }
 };
 
+// UTILS
+function renderDefaultTemplate(res) {
+    return res.render(defaultRoute.templateName, defaultRoute.data);
+}
 
 /* Route /blogs | GET/POST Methods */
 router.route('/blogs').all((req, res) => {
@@ -70,32 +74,51 @@ router.route('/blogs').all((req, res) => {
 
 /* Route /blogs/{id} | GET/PUT/DELETE Methods */
 router.route('/blogs/:id').all((req, res) => {
-    const id = req.params.id;
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
-            message = `${routerConfig.methods.get} method | Id: ${id} | Url: ${req.originalUrl}`;
-            log().info(message);
+            // get post with specific id
+            postService.getPostById(req.params.id)
+                .then((data) => {
+                    const doc = data[0];
+                    // log that we've got a document by id
+                    log().info(`[${doc.toObject().title}] was requested | ${routerConfig.methods.post} | Url: ${req.originalUrl}`);
+                    res.send(doc);
+                })
+                .catch(err => {
+                    // logging error creating user
+                    log().error(messages.getPostErrorMessage);
+                    res.send(err);
+                });
 
-            postService.getPostById(id);
-
-            res.send(message);
             break;
         case routerConfig.methods.put:
-            message = `${routerConfig.methods.put} method | Id: ${id} | Url: ${req.originalUrl}`;
-            log().info(message);
+            postService.updatePost(req.params.id)
+                .then((data) => {
+                    // log that we've got a document by id
+                    log().info(`[${data.message}] | ${routerConfig.methods.put} | Url: ${req.originalUrl}`);
+                    res.send(data);
+                })
+                .catch(err => {
+                    // logging error creating user
+                    log().error(messages.updatePostError);
+                    res.send(err);
+                });
 
-            postService.updatePost(id, {});
-
-            res.send(message);
             break;
         case routerConfig.methods.delete:
-            message = `${routerConfig.methods.delete} method | Id: ${id} | Url: ${req.originalUrl}`;
-            log().info(message);
-
-            postService.deletePost(id);
-
-            res.send(message);
+            // delete document with specific id
+            postService.deletePost(req.params.id)
+                .then((data) => {
+                    // log that we've got a document by id
+                    log().info(`[${data.message}] | ${routerConfig.methods.delete} | Url: ${req.originalUrl}`);
+                    res.send(data);
+                })
+                .catch(err => {
+                    // logging error creating user
+                    log().error(messages.deletePostError);
+                    res.send(err);
+                });
             break;
         default:
             message = `${req.method} method is restricted for this route | Url: $\{req.originalUrl}`;
@@ -105,15 +128,17 @@ router.route('/blogs/:id').all((req, res) => {
     }
 });
 
+/* Mock for error route */
+router.route('/error').all((req) => {
+    if (req.method === routerConfig.methods.get) {
+        throw Error(`Requested a route with error`);
+    }
+});
+
 /* Default routes */
 router.route(['/', '*']).get((req, res) => {
     log().info(`Url: ${req.originalUrl}`);
     renderDefaultTemplate(res);
 });
-
-// UTILS
-function renderDefaultTemplate(res) {
-    return res.render(defaultRoute.templateName, defaultRoute.data);
-}
 
 module.exports = router;

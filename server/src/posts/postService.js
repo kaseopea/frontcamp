@@ -14,20 +14,26 @@ class PostService {
     }
 
     getAllPosts() {
-        // return new Promise((resolve, reject) => this.model.find({}, (err, posts) => (err) ? reject(err) : resolve(posts)));
         return new Promise((resolve, reject) => {
             return this.model.find({}, (err, posts) => {
                 if (err) {
                     return reject(err);
                 }
-
                 return resolve(posts);
             });
         });
     }
 
     getPostById(postId) {
-        console.log(`Get post by id [${postId}]`);
+        const id = mongoose.Types.ObjectId(postId);
+        return new Promise((resolve, reject) => {
+            return this.model.find({ _id: id}, (err, post) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(post);
+            });
+        });
     }
 
     addPost(postData) {
@@ -39,12 +45,54 @@ class PostService {
         }));
     }
 
-    updatePost(id, postConfig) {
-        console.log(`Updating post [${id}] with config [${postConfig}]`);
+    updatePost(id) {
+        return new Promise((resolve, reject) => {
+            return this.model.find({ _id: id}, (err, post) => {
+                if (err || !post.length) {
+                    return reject(err);
+                }
+
+                const document = post[0];
+
+                //update some information in post and save
+                document.title = `${document.title} Upd!`;
+
+                // save the user
+                document.save((errSave) => {
+                    if (errSave) {
+                        return reject(errSave);
+                    }
+
+                    return resolve({
+                        status: 'ok',
+                        message: messages.updatePostSuccess
+                    });
+                });
+
+                return resolve(post);
+            });
+        });
     }
 
     deletePost(postId) {
-        console.log(`Deleting post with id [${postId}]`);
+        const id = mongoose.Types.ObjectId(postId);
+        return new Promise((resolve, reject) => {
+            return this.model.find({ _id: id}, (err, post) => {
+                if (err || !post.length) {
+                    return reject(err);
+                }
+
+                post[0].remove((errData) => {
+                    if (errData) {
+                        return reject(err);
+                    }
+                    return resolve({
+                        status: 'ok',
+                        message: messages.deletePostSuccess
+                    });
+                });
+            });
+        });
     }
 }
 
