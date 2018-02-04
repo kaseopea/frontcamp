@@ -29,7 +29,7 @@ function renderDefaultTemplate(res) {
 }
 
 /* Route /blogs | GET/POST Methods */
-router.route('/blogs').all((req, res) => {
+router.route('/blogs').all((req, res, next) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
@@ -45,7 +45,7 @@ router.route('/blogs').all((req, res) => {
                 .catch(err => {
                     // logging error creating user
                     log().error(messages.getAllPostsError);
-                    res.send(err);
+                    next(err);
                 });
             break;
         case routerConfig.methods.post:
@@ -61,7 +61,7 @@ router.route('/blogs').all((req, res) => {
                 .catch(err => {
                     // logging error creating user
                     log().error(messages.addPostErrorMessage);
-                    res.send(err);
+                    next(err);
                 });
             break;
         default:
@@ -73,7 +73,7 @@ router.route('/blogs').all((req, res) => {
 });
 
 /* Route /blogs/{id} | GET/PUT/DELETE Methods */
-router.route('/blogs/:id').all((req, res) => {
+router.route('/blogs/:id').all((req, res, next) => {
     let message;
     switch (req.method) {
         case routerConfig.methods.get :
@@ -88,7 +88,7 @@ router.route('/blogs/:id').all((req, res) => {
                 .catch(err => {
                     // logging error creating user
                     log().error(messages.getPostErrorMessage);
-                    res.send(err);
+                    next(err);
                 });
 
             break;
@@ -102,7 +102,7 @@ router.route('/blogs/:id').all((req, res) => {
                 .catch(err => {
                     // logging error creating user
                     log().error(messages.updatePostError);
-                    res.send(err);
+                    next(err);
                 });
 
             break;
@@ -117,7 +117,7 @@ router.route('/blogs/:id').all((req, res) => {
                 .catch(err => {
                     // logging error creating user
                     log().error(messages.deletePostError);
-                    res.send(err);
+                    next(err);
                 });
             break;
         default:
@@ -129,9 +129,9 @@ router.route('/blogs/:id').all((req, res) => {
 });
 
 /* Mock for error route */
-router.route('/error').all((req) => {
+router.route('/error').all((req, res, next) => {
     if (req.method === routerConfig.methods.get) {
-        throw Error(`Requested a route with error`);
+        next(Error(`Requested a route with error`));
     }
 });
 
