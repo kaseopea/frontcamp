@@ -24,7 +24,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(passport.initialize());
-app.use(session());
+app.use(passport.session());
 
 /* User */
 const User = require('./src/user/userSchema');
