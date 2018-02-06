@@ -36,17 +36,21 @@ const login = (req, res) => {
 
 // Post login
 const doLogin = (req, res, next) => {
-    passport.authenticate('local')(req, res, () => res.redirect('/'));
-
-    /*passport.authenticate('local', (err, user) => {
+    passport.authenticate('local', (err, user) => {
         if (err) {
             return next(err);
         }
         if (!user) {
             return res.redirect('/login');
         }
-        return res.redirect('/');
-    })(req, res, next);*/
+        req.login(user, {}, (errLogin) => {
+            if (errLogin) {
+                return next(errLogin);
+            }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+
 };
 
 // logout
