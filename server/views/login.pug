@@ -1,5 +1,14 @@
-html
-    head
-        title Login page
-    body
-        h1 Login page
+extends layout
+
+block content
+    .container
+        div.col-md-6.col-md-offset-3
+            form.form-signin(role="form", action="/login", method="post")
+                h2.form-signin-heading Sign in
+                label.sr-only(for="inputEmail")
+                div.form-group
+                    input.form-control.input-lg(type="text", name="username", id="inputEmail", placeholder="Username", required, autofocus)
+                div.form-group
+                    input.form-control.input-lg(type="password", name="password", id="inputPassword", placeholder="Password")
+                div.form-group
+                    button.btn.btn-lg.btn-primary.btn-block(type="submit") LOGIN

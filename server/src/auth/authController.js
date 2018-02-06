@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../user/userSchema');
 
-const userController = {};
-
 // Restrict access to root page
 const home = (req, res) => {
-    res.render('index', { user : req.user });
+    res.render('index', {
+        user: req.user
+    });
 };
 
 // Go to registration page
@@ -16,13 +15,14 @@ const register = (req, res) => {
 
 // Post registration
 const doRegister = (req, res) => {
-    const newUser = new User({
-        username : req.body.username,
-        name: req.body.name
-    });
-    User.register(newUser, req.body.password, (err, user) => {
+    const user = {
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password
+    };
+    User.register(new User(user), user.password, (err, user) => {
         if (err) {
-            return res.render('register', { user});
+            return res.render('register', {user});
         }
         // passport authenticate
         passport.authenticate('local')(req, res, () => res.redirect('/'));
@@ -35,9 +35,18 @@ const login = (req, res) => {
 };
 
 // Post login
-const doLogin = (req, res) => {
-    // passport authenticate
+const doLogin = (req, res, next) => {
     passport.authenticate('local')(req, res, () => res.redirect('/'));
+
+    /*passport.authenticate('local', (err, user) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/login');
+        }
+        return res.redirect('/');
+    })(req, res, next);*/
 };
 
 // logout

@@ -8,6 +8,7 @@ const errorHandlingMiddleware = require('./src/errorHandlingMiddleware/errorHand
 const passport = require('passport');
 const session = require("express-session");
 const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -16,6 +17,12 @@ app.set('view engine', 'pug');
 
 /* Setting alternative views directory */
 app.set('views', path.join(__dirname, '/views'));
+
+/* Body Parser */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 /* Passport */
 app.use(session({
