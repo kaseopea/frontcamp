@@ -1,7 +1,13 @@
-export class Dispatcher {
+/* AppDispatcher Class Singleton */
+export class AppDispatcher {
     constructor() {
+        if (typeof AppDispatcher.instance === 'object') {
+            return AppDispatcher.instance;
+        }
         this.id = 0;
         this.callbacks = {};
+        AppDispatcher.instance = this;
+        return this;
     }
 
     register(callback) {
@@ -12,6 +18,7 @@ export class Dispatcher {
     unregister(id) {
         delete this.callbacks[id];
     }
+
     dispatch(payload) {
         Object.keys(this.callbacks).forEach((key) => {
             if (Object.prototype.hasOwnProperty.call(this.callbacks, key)) {
