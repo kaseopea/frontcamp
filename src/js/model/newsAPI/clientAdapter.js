@@ -8,7 +8,7 @@ export class NewsAPIClientAdapter {
     }
 
     loadDefaultNews() {
-        const {keywords} = this.clientConfig.keywords;
+        const {keywords} = this.clientConfig;
         const query = keywords[Math.floor(Math.random() * keywords.length)];
         return new Promise((resolve, reject) => {
             this.client.getNewsByParam('q', query)

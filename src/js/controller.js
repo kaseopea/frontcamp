@@ -1,6 +1,8 @@
 import {APP_CONFIG} from './const/appConfig';
 import {ELEMENTS} from './const/elements';
 import {TEXT} from './const/messages';
+import {SortingStrategy} from './utils/sortingStrategy';
+import {Utils} from './utils/utils';
 
 // templates
 const templateError = require('./views/errorMessage.ejs');
@@ -33,8 +35,13 @@ export class Controller {
         this.model
             .loadNewsSources()
             .then((data) => {
+                // sorting data
+                const sortingStrategy = new SortingStrategy();
+                sortingStrategy.setStrategy(Utils.getRandomStrategy());
                 // render content
-                this.view.renderSourcesContent(templateSources({data}));
+                this.view.renderSourcesContent(templateSources({
+                    data: sortingStrategy.sort(data)
+                }));
 
                 // add event listener
                 ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
