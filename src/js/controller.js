@@ -39,9 +39,11 @@ export class Controller {
 
         // render content when store state changed
         this.sourcesStore.addListener((payload) => {
+            // render content
             this.view.renderSourcesContent(templateSources({
                 data: payload.sources
             }));
+
             // add event listener for sources click event
             ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
         });
