@@ -42,7 +42,6 @@ export class Controller {
             this.view.renderSourcesContent(templateSources({
                 data: payload.sources
             }));
-
             // add event listener for sources click event
             ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
         });
