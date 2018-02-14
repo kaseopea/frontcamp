@@ -1,0 +1,44 @@
+<h2 class="page-title"><%=sourceTitle%></h2>
+
+<div class="news-grid clearfix">
+
+    <% for(var i = 0; i < data.length; ++i) { %>
+        <div class="grid-item item-<%=i+1%>">
+        <div class="grid-item-inner">
+
+            <div class="card" data-article-id="<%=data[i].id%>">
+                <div class="thumb">
+                    <% var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        var date = (data[i].publishedAt) ? new Date(data[i].publishedAt) : null;
+                        if (date && newsShowDateLabel) { %>
+
+                        <div class="date">
+                            <div class="day"><%=date.getDate()%></div>
+                            <div class="month"><%=monthNames[date.getMonth()]%></div>
+                        </div>
+                    <% } %>
+
+                    <% if (data[i].urlToImage) { %>
+                        <a href="<%=data[i].url%>" target="_blank">
+                            <img class="thumb-pic" src="<%=data[i].urlToImage%>"/>
+                        </a>
+                    <% } %>
+                </div>
+
+                <article class="card-info">
+                    <a href="<%=data[i].url%>" class="card-info-title" target="_blank"><%=data[i].title%></a>
+                    <% if (data[i].description) { %>
+                        <p class="card-info-desc"><%=data[i].description.substring(0, newsDescriptionLimit)%>...</p>
+                    <% } %>
+                    <% if (data[i].author) { %>
+                        <span class="card-info-author"><%=data[i].author.substring(0, newsAuthorLimit)%></span>
+                    <% } %>
+                </article>
+
+            </div>
+
+        </div>
+    </div>
+    <% } %>
+
+</div>

@@ -1,0 +1,17 @@
+<ul class="sources-list">
+    <% for(var i = 0; i < data.length; ++i) { %>
+    <li data-source-id="<%=data[i].id%>">
+        <a title="<%=data[i].name%>" data-source-id="<%=data[i].id%>">
+            <% if (false) { %>
+                <img alt="<%=data[i].name%>" class="icon"
+                     data-source-id="<%=data[i].id%>"
+                     src="">
+                <!-- https://icons.better-idea.org/icon?url=<%=data[i].url%>&amp;size=16..32..48 -->
+            <% } else { %>
+                <span alt="<%=data[i].name%>" class="icon-default" data-source-id="<%=data[i].id%>"></span>
+            <% } %>
+            <span class="link-text" data-source-id="<%=data[i].id%>"><%=data[i].name%></span>
+        </a>
+    </li>
+    <% } %>
+</ul>

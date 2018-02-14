@@ -22,9 +22,8 @@ Installed **ESLint** (with Aitbnb config) and **jscs**
 [eslint with airbnb config](https://www.themarketingtechnologist.co/eslint-with-airbnb-javascript-style-guide-in-webstorm/)
 [jscs config](https://www.themarketingtechnologist.co/how-to-get-airbnbs-javascript-code-style-working-in-webstorm/)
 
-Fetch browser polyfill
-https://www.npmjs.com/package/whatwg-fetch
-
-## Useful Links
+## Useful links
+* [Fetch browser polyfill](https://www.npmjs.com/package/whatwg-fetch)
+* [Babel plugin: Class properties transform](http://babeljs.io/docs/plugins/transform-class-properties/)
 * [Pug – template engine for Node.js](https://github.com/pugjs/pug)
 * [Winston logger](https://github.com/winstonjs/winston)

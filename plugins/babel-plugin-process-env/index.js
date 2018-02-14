@@ -9,7 +9,6 @@ const LABELS = {
 
 /* *************** UTILS *************** */
 function isProcessEnv(path) {
-    console.log(path.get('object'));
     return path.get('object').matchesPattern(LABELS.processEnv);
 }
 

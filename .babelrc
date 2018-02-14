@@ -3,6 +3,7 @@
     "env"
   ],
   "plugins": [
-    "process-env"
+    "process-env",
+    "transform-class-properties"
   ]
 }

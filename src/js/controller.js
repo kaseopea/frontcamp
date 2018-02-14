@@ -1,62 +1,190 @@
-import { APP_CONST } from './const/general';
+import {APP_CONFIG} from './const/appConfig';
+import {ELEMENTS} from './const/elements';
+import {TEXT} from './const/messages';
+import {SourcesActions} from './flux/sourcesActions';
+import {SourcesStore} from './flux/sourcesStore';
+
+// templates
+const templateError = require('./views/errorMessage.ejs');
+const templateNews = require('./views/newsMarkup.ejs');
+const templateSources = require('./views/sourcesMarkup.ejs');
 
 export class Controller {
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
+        this.activeNews = null;
+        this.sourcesActions = new SourcesActions();
+        this.sourcesStore = new SourcesStore();
+        this.init();
+        this.initEvents();
+    }
+    init() {
+        this.initNewsSources();
+        this.loadDefaultNews();
+    }
+    initEvents() {
+        this.initMainMenu();
+        this.initResizeEventListener();
 
-  /* Get HTML contents for sources aside */
-  static getSourcesHtml(data) {
-    if (!data.length) {
-      return '';
+        ELEMENTS.logo.addEventListener('click', this.loadDefaultNews.bind(this));
+        ELEMENTS.mainContent.addEventListener('click', this.articleClickHandler.bind(this));
+        ELEMENTS.menuButton.addEventListener('click', this.toggleMenu.bind(this));
     }
 
-    const sources = data.map(source => `
-        <li data-source-id="${source.id}">
-            <a title="${source.name}" data-source-id="${source.id}">
-                <img alt="${source.name}" class="icon" 
-                    data-source-id="${source.id}"
-                    src="https://icons.better-idea.org/icon?url=${source.url}&amp;size=16..32..48">
-                <span class="link-text" data-source-id="${source.id}">${source.name}</span>
-            </a>
-        </li>`);
+    /* SOURCES (FLUX POWERED) */
+    initNewsSources() {
+        // load sources with flux model
+        this.sourcesActions.loadNewsSources();
 
-    return `<ul class="sources-list">${sources.join('')}</ul>`;
-  }
+        // render content when store state changed
+        this.sourcesStore.addListener((payload) => {
+            // render content
+            this.view.renderSourcesContent(templateSources({
+                data: payload.sources
+            }));
 
-  /* Get HTML for News contents */
-  static getNewsHtml(data) {
-    if (!data.length) {
-      return '';
+            // add event listener for sources click event
+            ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
+        });
     }
-    const { source: { name: sourceTitle = ''} } = data[0];
 
-    const news = data.map((newsOne, index) => {
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const date = (newsOne.publishedAt) ? new Date(newsOne.publishedAt) : null;
-      return `<div class="grid-item item-${index + 1}">
-        <div class="grid-item-inner">
-        
-        <div class="card" data-article-id="${newsOne.id}">
-            <div class="thumb">
-              ${(date && APP_CONST.newsShowDateLabel) ? `<div class="date">
-                <div class="day">${date.getDate()}</div>
-                <div class="month">${monthNames[date.getMonth()]}</div>
-              </div>` : ''}
-              <a href="${newsOne.url}" target="_blank">
-                <img class="thumb-pic" src="${newsOne.urlToImage}"/>
-              </a>
-            </div>
+    sourceListClickHandler(event) {
+        this.openSource(event.target.getAttribute('data-source-id'));
+        event.stopPropagation();
+    }
 
-            <article class="card-info">
-              <a href="${newsOne.url}" class="card-info-title" target="_blank">${newsOne.title}</a>
-              ${(newsOne.description) ? `<p class="card-info-desc">${newsOne.description.substring(0, APP_CONST.newsDescriptionLimit)}...</p>` : ''}
-              ${(newsOne.author) ? `<span class="card-info-author">${newsOne.author.substring(0, APP_CONST.newsAuthorLimit)}` : ''}</span>
-            </article>
+    /* NEWS */
+    loadDefaultNews() {
+        const that = this;
+        // prepare content view to load data
+        this.view.prepareContentForLoading();
 
-        </div>
+        // ask model to load default set of news
+        this.model.loadDefaultNews()
+            .then((data) => {
+                // save data as active news
+                that.activeNews = data;
 
-        </div>
-    </div>`;
-    });
+                // save source title
+                const {source: {name: sourceTitle = ''}} = data[0];
 
-    return `<h2 class="page-title">${sourceTitle}</h2><div class="news-grid clearfix">${news.join('')}</div>`;
-  }
+                // render content
+                this.view.renderContent(templateNews({
+                    data,
+                    sourceTitle,
+                    newsDescriptionLimit: APP_CONFIG.newsDescriptionLimit,
+                    newsAuthorLimit: APP_CONFIG.newsAuthorLimit,
+                    newsShowDateLabel: APP_CONFIG.newsShowDateLabel
+                }));
+            })
+            .catch(() => {
+                // show error message no items found
+                this.view.renderContent(templateError({
+                    message: TEXT.error.noNewsLoaded
+                }));
+            });
+    }
+
+    loadNewsBySourceId(sourceId) {
+        const that = this;
+        this.view.removeClass(document.body, ELEMENTS.menuExpandedClass);
+        this.model
+            .getNewsByParam('sources', sourceId)
+            .then((data) => {
+                // save data as active news
+                that.activeNews = data;
+
+                // save source title
+                const {source: {name: sourceTitle = ''}} = data[0];
+
+                // render data
+                this.view.renderContent(templateNews({
+                    data,
+                    sourceTitle,
+                    newsDescriptionLimit: APP_CONFIG.newsDescriptionLimit,
+                    newsAuthorLimit: APP_CONFIG.newsAuthorLimit,
+                    newsShowDateLabel: APP_CONFIG.newsShowDateLabel
+                }));
+            })
+            .catch(() => {
+                // show error message no items found
+                this.view.renderContent(templateError({
+                    message: TEXT.error.noNewsLoaded
+                }));
+            });
+    }
+
+
+    /* General */
+    articleClickHandler(event) {
+        event.preventDefault();
+        const contentViewerConfig = this.getArticleData(event.target);
+
+        if (contentViewerConfig) {
+            Controller.initContentViewer(contentViewerConfig);
+        }
+    }
+
+    initMainMenu() {
+        if (this.view.isMobileView() && !this.view.isHidden(ELEMENTS.sourcesContent)) {
+            this.view.addClass(document.body, ELEMENTS.menuExpandedClass);
+        }
+    }
+
+    initResizeEventListener() {
+        window.addEventListener('resize', () => {
+            if (this.view.isMobileView()) {
+                this.view.hideElement(ELEMENTS.sourcesContent);
+                this.view.removeClass(document.body, ELEMENTS.menuExpandedClass);
+            } else {
+                this.view.showElement(ELEMENTS.sourcesContent);
+            }
+        });
+    }
+
+    // Mobile Menu Button
+    toggleMenu() {
+        this.view.toggleElementWithClassnameToBody(ELEMENTS.sourcesContent, ELEMENTS.menuExpandedClass);
+    }
+
+    /* UTILS */
+    openSource(sourceId) {
+        this.view.hideForMobileView(ELEMENTS.sourcesContent);
+
+        if (sourceId) {
+            // prepare content view to load data
+            this.view.prepareContentForLoading();
+
+            // load source by id
+            this.loadNewsBySourceId(sourceId);
+        }
+    }
+
+    getArticleData(element) {
+        let output = null;
+        if (element && element.dataset && element.dataset.articleId) {
+            const newsId = parseInt(element.dataset.articleId, 10);
+            if (this.activeNews) {
+                const activeArticle = this.activeNews.filter(news => news.id === newsId);
+                output = {
+                    title: activeArticle[0].title,
+                    url: activeArticle[0].url
+                }
+            }
+        } else {
+            output = (element.parentNode) ? this.getArticleData(element.parentNode) : null;
+        }
+
+        return output;
+    }
+
+    static initContentViewer(config) {
+        require.ensure(['./contentViewer'], (require) => {
+            const cv = require('./contentViewer');
+            const cViewer = new cv.ContentViewer(config);
+            return cViewer;
+        });
+    }
+
 }
