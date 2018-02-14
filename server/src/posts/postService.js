@@ -3,7 +3,9 @@ const appConfig = require('../../config.json');
 const messages = require('../../messages');
 
 /* Connection */
-mongoose.connect(appConfig.db.posts.connection);
+mongoose.connect(appConfig.db.posts.connection)
+    .then(() =>  console.log(messages.postServiceDbConnectSuccess))
+    .catch((err) => console.error(err));
 
 /* Schema */
 const PostModel = require('./postSchema');

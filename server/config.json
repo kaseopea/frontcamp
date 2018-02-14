@@ -2,6 +2,7 @@
   "appName": "Amazing app",
   "appPort": 8080,
   "logFilename": "route-access.log",
+  "secretKey": "secretsecretkey",
   "db": {
     "prefix": "rusau_",
     "posts": {
