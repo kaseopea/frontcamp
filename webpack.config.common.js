@@ -43,7 +43,10 @@ module.exports = {
                         }
                     },
                     {
-                        loader: 'postcss-loader'
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: IS_DEV_MODE
+                        }
                     },
                     {
                         loader: 'sass-loader',

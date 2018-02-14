@@ -1,8 +1,8 @@
 import {APP_CONFIG} from './const/appConfig';
 import {ELEMENTS} from './const/elements';
 import {TEXT} from './const/messages';
-import {SortingStrategy} from './utils/sortingStrategy';
-import {Utils} from './utils/utils';
+import {SourcesActions} from './flux/sourcesActions';
+import {SourcesStore} from './flux/sourcesStore';
 
 // templates
 const templateError = require('./views/errorMessage.ejs');
@@ -14,6 +14,8 @@ export class Controller {
         this.model = model;
         this.view = view;
         this.activeNews = null;
+        this.sourcesActions = new SourcesActions();
+        this.sourcesStore = new SourcesStore();
         this.init();
         this.initEvents();
     }
@@ -30,27 +32,21 @@ export class Controller {
         ELEMENTS.menuButton.addEventListener('click', this.toggleMenu.bind(this));
     }
 
-    /* SOURCES */
+    /* SOURCES (FLUX POWERED) */
     initNewsSources() {
-        this.model
-            .loadNewsSources()
-            .then((data) => {
-                // sorting data
-                const sortingStrategy = new SortingStrategy();
-                sortingStrategy.setStrategy(Utils.getRandomStrategy());
-                // render content
-                this.view.renderSourcesContent(templateSources({
-                    data: sortingStrategy.sort(data)
-                }));
+        // load sources with flux model
+        this.sourcesActions.loadNewsSources();
 
-                // add event listener
-                ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
-            })
-            .catch(() => {
-                this.view.renderContent(templateError({
-                    message: TEXT.error.noSourcesLoaded
-                }));
-            });
+        // render content when store state changed
+        this.sourcesStore.addListener((payload) => {
+            // render content
+            this.view.renderSourcesContent(templateSources({
+                data: payload.sources
+            }));
+
+            // add event listener for sources click event
+            ELEMENTS.sourcesList[0].addEventListener('click', this.sourceListClickHandler.bind(this));
+        });
     }
 
     sourceListClickHandler(event) {
