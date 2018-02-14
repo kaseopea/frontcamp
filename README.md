@@ -25,3 +25,5 @@ Installed **ESLint** (with Aitbnb config) and **jscs**
 ## Useful links
 * [Fetch browser polyfill](https://www.npmjs.com/package/whatwg-fetch)
 * [Babel plugin: Class properties transform](http://babeljs.io/docs/plugins/transform-class-properties/)
+* [Pug – template engine for Node.js](https://github.com/pugjs/pug)
+* [Winston logger](https://github.com/winstonjs/winston)

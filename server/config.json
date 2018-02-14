@@ -1,0 +1,5 @@
+{
+  "appName": "Amazing app",
+  "appPort": 8080,
+  "logFilename": "route-access.log"
+}
