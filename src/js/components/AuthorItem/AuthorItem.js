@@ -7,7 +7,7 @@ class AuthorItem extends Component {
     }
 
     showPlipsHandler() {
-        this.props.onClick(this.props.author.name);
+        this.props.onClick(this.props.author);
     };
 
     render() {
@@ -15,7 +15,7 @@ class AuthorItem extends Component {
 
         return (
             <div className="author-item">
-                <span className="author-item-title">{author.name}</span>
+                <span className="author-item-title">{author.firstName} {author.lastName}</span>
                 <button className="button-secondary pure-button author-item-show-plips" onClick={this.showPlipsHandler}>Show plips</button>
             </div>
         );

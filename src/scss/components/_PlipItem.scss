@@ -12,8 +12,38 @@
     font-size: 80%;
 }
 
+/* Main plip style */
 .plip-item-content {
-    font-family: $accent-font;
-    font-weight: 900;
-    font-size: 3.8rem;
+    margin-left: 130px;
+    .text {
+        font-family: $accent-font;
+        font-weight: 900;
+        font-size: 3.8rem;
+        margin: 0;
+        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .date {
+        font-style: italic;
+    }
+}
+
+/* Avatar */
+.plip-item-avatar {
+    float: left;
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+
+
+    .photo {
+        width: 80px;
+        border-radius: 100%;
+        @include drop-shadow();
+    }
+
+    .title {
+        font-weight: bold;
+    }
 }

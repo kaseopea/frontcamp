@@ -11,18 +11,18 @@ class PlipAuthorFilter extends Component {
 
     componentWillMount() {
         this.authorsList = this.authors.map( author => {
-            return (<AuthorItem key={author.id} author={author} onClick={this.authorClickHandler} />);
+            return (<AuthorItem key={author.id} author={author} onClick={this.authorClickHandler.bind(this)} />);
         });
     }
 
-    authorClickHandler(authorName) {
-        console.warn('Plip-plop', authorName);
+    authorClickHandler(author) {
+        this.props.onFilter(author);
     }
 
     render() {
         return (
             <div className="plip-author-filter">
-                <h2>Top Authors</h2>
+                <h2 className="title">Топчик</h2>
                 {this.authorsList}
             </div>
         );

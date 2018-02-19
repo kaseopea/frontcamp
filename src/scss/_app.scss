@@ -4,6 +4,10 @@
 }
 
 .app-header {
+    margin: 20px 0;
+    background-color: $white;
+    @include drop-shadow();
+    border-radius: $default-border-radius;
     padding: 20px;
 }
 

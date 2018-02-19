@@ -9,6 +9,7 @@ config.devServer = {
     // stats: 'errors-only'
 };
 
-config.devtool = 'eval';
+// config.devtool = 'eval';
+config.devtool = 'cheap-module-source-map';
 
 module.exports = config;

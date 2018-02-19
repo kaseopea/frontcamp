@@ -13,9 +13,10 @@ class App extends Component {
         this.state = {
             plips: [],
             plipsSortOrder: 'desc'
-        }
+        };
 
         this.addPlipHandler = this.addPlipHandler.bind(this);
+        this.filterPlips = this.filterPlips.bind(this);
 
     }
 
@@ -34,21 +35,30 @@ class App extends Component {
         });
     }
 
+    filterPlips(author) {
+        console.warn(author);
+    }
+
     render() {
         return (
             <div className="app">
                 <header className="app-header">
-                    <h1 className="app-title">PliP-PloP</h1>
+                    <div className="pure-g">
+                        <div className="pure-u-1-2">
+                            <h1 className="app-title">PliP-PloP</h1>
+                        </div>
+                        <div className="pure-u-1-2">
+                            <AddPlip onAddPlipSubmit={this.addPlipHandler}/>
+                        </div>
+                    </div>
                 </header>
-
-                <AddPlip onAddPlipSubmit={this.addPlipHandler}/>
 
                 <div className="pure-g">
                     <div className="pure-u-2-3">
                         <PlipsList plips={this.state.plips} sortOrder={this.state.plipsSortOrder}/>
                     </div>
                     <div className="pure-u-1-3">
-                        <PlipAuthorFilter/>
+                        <PlipAuthorFilter onFilter={this.filterPlips}/>
                     </div>
                 </div>
 
