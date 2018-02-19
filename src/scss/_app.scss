@@ -1,52 +1,37 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700,900|Roboto:400,700');
-
-/** ************************************************************************************************************
-    General styles
- */
-html {
-  background: $main-background-color url('../assets/bg.png');
-  font-family: $main-font;
-  font-size: 16px;
-  line-height: 1.25;
-  -webkit-font-smoothing: antialiased;
-}
-body {
-  margin: 0;
-  padding: 0;
+.app {
+    width: 60%;
+    margin: 0 auto;
 }
 
-/* Loader */
-#loader {
-  text-align: center;
-  width: $loader-size;
-  margin: 0 auto;
-
-  .loader-svg {
-    width: $loader-size;
-  }
+.app-header {
+    padding: 20px;
 }
 
-/* Error message */
-.error-message {
-  width: 90%;
-  margin: 0 auto;
-  background-color: #e74c3c;
-  color: $error-message-text;
-  padding: 1em 2em;
-  border-radius: 5px;
+.app-title {
+    font-family: $accent-font;
+    font-weight: 900;
+    font-size: 4.8rem;
+
+    margin: 0;
+
+    background: -webkit-linear-gradient(#ff070b, #e5008d, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Clearfix */
-.clearfix:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
+.app-slogan {
+    font-size: large;
+    color: #aaa;
 }
-.clearfix { display: inline-block; }
-/* start commented backslash hack \*/
-* html .clearfix { height: 1%; }
-.clearfix { display: block; }
-/* close commented backslash hack */
+
+/* APP FOOTER */
+.app-footer {
+    background-color: $white;
+    padding: 20px;
+    border-radius: $default-border-radius;
+    margin-bottom: 20px;
+    color: $font-dimed;
+    text-align: center;
+
+    @include drop-shadow();
+}

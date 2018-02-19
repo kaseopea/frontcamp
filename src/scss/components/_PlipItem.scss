@@ -1,0 +1,19 @@
+.plip-item {
+    background-color: $white;
+    padding: 20px;
+    @include drop-shadow();
+    border-radius: $default-border-radius;
+
+    margin: 10px 0;
+}
+
+.plip-item-desc {
+    color: #999;
+    font-size: 80%;
+}
+
+.plip-item-content {
+    font-family: $accent-font;
+    font-weight: 900;
+    font-size: 3.8rem;
+}

@@ -1,0 +1,13 @@
+.add-plip {
+    background-color: $white;
+    padding: 20px;
+    @include drop-shadow();
+    border-radius: $default-border-radius;
+
+    margin: 20px 0;
+}
+
+.add-plip-submit {
+    margin-left: 5px;
+}
+

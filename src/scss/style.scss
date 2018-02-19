@@ -1,10 +1,11 @@
-@import "vars";
-@import "app";
-@import "header";
-@import "content";
-@import "aside";
-@import "footer";
-@import "grid";
-@import "card";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900|Roboto:400,700&subset=cyrillic');
 
-@import "contentViewer";
+@import "vars";
+@import "mixin";
+@import "general";
+@import "buttons";
+@import "app";
+
+@import "components/AddPlip";
+@import "components/PlipItem";
+@import "components/AuthorItem";

@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700,900|Roboto:400,700');
+
+/** ************************************************************************************************************
+    General styles
+ */
+html {
+    font-size: 10px;
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: $main-background-color;
+
+    font-family: $main-font;
+    font-size: 1.6rem;
+}
+
+/* Clearfix */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+/* close commented backslash hack */

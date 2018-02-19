@@ -33,9 +33,11 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "cpx": "^1.5.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
+    "ejs": "^2.5.7",
     "ejs-compiled-loader": "^1.1.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -55,8 +57,7 @@
     "style-loader": "^0.19.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.5",
-    "whatwg-fetch": "^2.0.3",
-    "ejs": "^2.5.7"
+    "whatwg-fetch": "^2.0.3"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -67,6 +68,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
     "pug": "^2.0.0-rc.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "winston": "^2.4.0"
   }
 }

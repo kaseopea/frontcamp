@@ -1,8 +1,6 @@
-/* Require styles */
-import '../json/data.json';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import '../scss/style.scss';
-import { App } from './app';
+import App from './App';
 
-/* MAIN APP */
-const app = new App();
-app.init();
+ReactDOM.render(<App/>, document.getElementById('root'));
