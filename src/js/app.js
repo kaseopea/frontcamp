@@ -1,28 +1,77 @@
-/* Import resources */
-import '../assets/apple-touch-icon.png';
-import '../assets/favicon.ico';
-import '../assets/favicon-16x16.png';
-import '../assets/favicon-32x32.png';
+import React, {Component} from 'react';
+import {PLIPMOCK} from './mocks/plipsMock';
 
-/* Main Imports resources */
-import {APP_CONFIG} from './const/appConfig';
-import {ViewFacade} from './viewFacade';
-import {Controller} from './controller';
-import {NewsModelFactory} from './model';
+import AddPlip from './components/AddPlip/AddPlip';
+import PlipsList from './components/PlipList/PlipsList';
+import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 
-export class App {
+
+class App extends Component {
     constructor() {
-        if (typeof App.instance === 'object') {
-            return App.instance;
-        }
-        this.modelProvider = new NewsModelFactory();
-        App.instance = this;
-        return this;
+        super();
+
+        this.state = {
+            plips: [],
+            plipsSortOrder: 'desc',
+            activeAuthor: null
+        };
+
+        this.addPlipHandler = this.addPlipHandler.bind(this);
+        this.filterPlips = this.filterPlips.bind(this);
+
     }
 
-    init() {
-        this.model = this.modelProvider.create(APP_CONFIG.defaultModel.provider);
-        this.view = new ViewFacade();
-        this.controller = new Controller(this.model, this.view);
+    componentWillMount() {
+        // Add mock data
+        this.setState({
+            plips: PLIPMOCK
+        });
+    }
+
+    addPlipHandler(plip) {
+        const plipsList = this.state.plips;
+        plipsList.push(plip);
+        this.setState({
+            plips: plipsList
+        });
+    }
+
+    filterPlips(username) {
+        this.setState({
+            activeAuthor: username
+        });
+
+    }
+
+    render() {
+        return (
+            <div className="app">
+                <header className="app-header">
+                    <div className="pure-g">
+                        <div className="pure-u-1-2">
+                            <h1 className="app-title">PliP-PloP</h1>
+                        </div>
+                        <div className="pure-u-1-2">
+                            <AddPlip onAddPlipSubmit={this.addPlipHandler}/>
+                        </div>
+                    </div>
+                </header>
+
+                <div className="pure-g">
+                    <div className="pure-u-2-3">
+                        <PlipsList plips={this.state.plips} activeAuthor={this.state.activeAuthor} sortOrder={this.state.plipsSortOrder}/>
+                    </div>
+                    <div className="pure-u-1-3">
+                        <PlipAuthorFilter onFilter={this.filterPlips}/>
+                    </div>
+                </div>
+
+                <footer className="app-footer">
+                    Plip-Plop&copy; 2018. No rights, nothing to reserve.
+                </footer>
+            </div>
+        );
     }
 }
+
+export default App;

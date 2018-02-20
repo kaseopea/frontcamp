@@ -16,7 +16,7 @@ class PlipAuthorFilter extends Component {
     }
 
     authorClickHandler(author) {
-        this.props.onFilter(author);
+        this.props.onFilter(author.username);
     }
 
     render() {

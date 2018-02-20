@@ -6,25 +6,35 @@ class PlipsList extends Component {
 
     constructor(props) {
         super(props);
-        this.plipItems = [];
+        this.plipItems = this.props.plips;
         this.plipAuthors = AUTHORS_LIST_MOCK;
+        this.output = null;
     }
 
     render() {
         if (this.props.plips) {
-            //sorting functionality
+            // sorting functionality
             this.plipItems = this.props.plips.sort((a, b) => {
                 return (this.props.sortOrder === 'desc')? (b.content > a.content) : (a.content > b.content);
             });
 
-            this.plipItems = this.plipItems.map((plip) => {
-                return <PlipItem key={plip.id} className="plips-list-item" plip={plip} author={this.findAuthor(plip.author)}/>;
+            // map plips - all or for specific author
+            this.output = this.plipItems.map((plip) => {
+                if (!!this.props.activeAuthor) {
+                    return (this.props.activeAuthor === plip.author) ? <PlipItem key={plip.id} className="plips-list-item" plip={plip} author={this.findAuthor(plip.author)}/> : null;
+                } else {
+                    return <PlipItem key={plip.id} className="plips-list-item" plip={plip} author={this.findAuthor(plip.author)}/>;
+                }
             });
+
+            if (!this.output.length) {
+                this.output = '<p>Nothing to show</p>';
+            }
         }
 
         return (
             <div className="plips-list">
-                {this.plipItems}
+                {this.output}
             </div>
         );
     }
