@@ -18,6 +18,7 @@ class App extends Component {
 
         this.addPlipHandler = this.addPlipHandler.bind(this);
         this.filterPlips = this.filterPlips.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
 
     }
 
@@ -43,6 +44,12 @@ class App extends Component {
 
     }
 
+    resetFilter() {
+        this.setState({
+            activeAuthor: null
+        });
+    }
+
     render() {
         return (
             <div className="app">
@@ -59,7 +66,10 @@ class App extends Component {
 
                 <div className="pure-g">
                     <div className="pure-u-2-3">
-                        <PlipsList plips={this.state.plips} activeAuthor={this.state.activeAuthor} sortOrder={this.state.plipsSortOrder}/>
+                        <PlipsList plips={this.state.plips}
+                                   activeAuthor={this.state.activeAuthor}
+                                   onReset={this.resetFilter}
+                                   sortOrder={this.state.plipsSortOrder}/>
                     </div>
                     <div className="pure-u-1-3">
                         <PlipAuthorFilter onFilter={this.filterPlips}/>
