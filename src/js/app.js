@@ -12,8 +12,8 @@ class App extends Component {
 
         this.state = {
             plips: [],
-            plipsSortOrder: 'desc',
-            activeAuthor: null
+            plipsSortOrder: 'asc',
+            activeAuthor: 'organicdog852' //default author
         };
 
         this.addPlipHandler = this.addPlipHandler.bind(this);
@@ -38,15 +38,19 @@ class App extends Component {
     }
 
     filterPlips(username) {
-        this.setState({
-            activeAuthor: username
+        const filteredPlips = PLIPMOCK.filter(plip => {
+            return plip.author === username;
         });
 
+        this.setState({
+            plips: filteredPlips,
+            activeAuthor: username
+        });
     }
 
     resetFilter() {
         this.setState({
-            activeAuthor: null
+            plips: PLIPMOCK
         });
     }
 
@@ -56,10 +60,10 @@ class App extends Component {
                 <header className="app-header">
                     <div className="pure-g">
                         <div className="pure-u-1-2">
-                            <h1 className="app-title">PliP-PloP</h1>
+                            <h1 className="app-title" onClick={this.resetFilter}>PliP-PloP</h1>
                         </div>
                         <div className="pure-u-1-2">
-                            <AddPlip onAddPlipSubmit={this.addPlipHandler}/>
+                            <AddPlip author={this.state.activeAuthor} onAddPlipSubmit={this.addPlipHandler}/>
                         </div>
                     </div>
                 </header>
@@ -67,7 +71,6 @@ class App extends Component {
                 <div className="pure-g">
                     <div className="pure-u-2-3">
                         <PlipsList plips={this.state.plips}
-                                   activeAuthor={this.state.activeAuthor}
                                    onReset={this.resetFilter}
                                    sortOrder={this.state.plipsSortOrder}/>
                     </div>
