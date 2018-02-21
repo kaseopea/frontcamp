@@ -1,31 +1,30 @@
 import React, {Component} from 'react';
 import PlipItem from '../PlipItem/PlipItem';
 import NoResults from '../NoResults/NoResults';
-import {AUTHORS_LIST_MOCK} from '../../mocks/authorsMock';
+import PlipService from '../../services/PlipService';
+import AuthorService from '../../services/AuthorService';
 
 class PlipsList extends Component {
 
     constructor(props) {
         super(props);
-        this.plipItems = this.props.plips;
-        this.plipAuthors = AUTHORS_LIST_MOCK;
+        this.plipItems = null;
         this.output = null;
     }
 
 
     render() {
         if (this.props.plips) {
+            this.plipItems = this.props.plips;
             // sorting functionality
-            this.plipItems = this.props.plips.sort((a, b) => {
-                return (this.props.sortOrder === 'desc') ? (b.content > a.content) : (a.content > b.content);
-            });
+            this.plipItems = PlipService.sortPlips(this.plipItems, this.props.sortOrder);
 
             // map plips data to component
             this.output = this.plipItems.map((plip) => {
                 return <PlipItem className="plips-list-item"
                                  key={plip.id}
                                  plip={plip}
-                                 author={this.findAuthor(plip.author)}/>;
+                                 author={AuthorService.getAuthor(plip.author)}/>;
             });
             if (!this.output.length) {
                 this.output = <NoResults onShowAll={this.props.onReset}/>;
@@ -37,11 +36,6 @@ class PlipsList extends Component {
                 {this.output}
             </div>
         );
-    }
-
-    /* UTILS */
-    findAuthor(userName) {
-        return this.plipAuthors.find(author => (author.username === userName));
     }
 }
 

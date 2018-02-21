@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {PLIPMOCK} from './mocks/plipsMock';
 
 import AddPlip from './components/AddPlip/AddPlip';
 import PlipsList from './components/PlipList/PlipsList';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 
+import PlipService from './services/PlipService';
+
+// import AuthorService from './services/AuthorService';
 
 class App extends Component {
     constructor() {
@@ -23,34 +25,29 @@ class App extends Component {
     }
 
     componentWillMount() {
-        // Add mock data
         this.setState({
-            plips: PLIPMOCK
+            plips: PlipService.getPlips()
         });
     }
 
     addPlipHandler(plip) {
-        const plipsList = this.state.plips;
-        plipsList.push(plip);
+        PlipService.addPlip(plip);
         this.setState({
-            plips: plipsList
+            plips: PlipService.getPlips()
         });
     }
 
     filterPlips(username) {
-        const filteredPlips = PLIPMOCK.filter(plip => {
-            return plip.author === username;
-        });
-
+        const authorPlips = PlipService.filterPlipsByAuthor(username);
         this.setState({
-            plips: filteredPlips,
+            plips: authorPlips,
             activeAuthor: username
         });
     }
 
     resetFilter() {
         this.setState({
-            plips: PLIPMOCK
+            plips: PlipService.getPlips()
         });
     }
 

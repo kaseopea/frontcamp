@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {AUTHORS_LIST_MOCK} from '../../mocks/authorsMock';
 import AuthorItem from '../AuthorItem/AuthorItem';
+import AuthorService from '../../services/AuthorService';
 
 class PlipAuthorFilter extends Component {
     constructor(props) {
         super(props);
-        this.authors = AUTHORS_LIST_MOCK;
+        this.authors = AuthorService.getAuthors();
         this.authorsList = null;
     }
 
