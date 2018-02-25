@@ -3,10 +3,7 @@ import React, {Component} from 'react';
 import AddPlip from './components/AddPlip/AddPlip';
 import PlipsList from './components/PlipList/PlipsList';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
-
 import PlipService from './services/PlipService';
-
-// import AuthorService from './services/AuthorService';
 
 class App extends Component {
     constructor() {
