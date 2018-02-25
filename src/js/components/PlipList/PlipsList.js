@@ -24,6 +24,7 @@ class PlipsList extends Component {
                 return <PlipItem className="plips-list-item"
                                  key={plip.id}
                                  plip={plip}
+                                 unplipHandler={this.props.unplipHandler}
                                  author={AuthorService.getAuthor(plip.author)}/>;
             });
             if (!this.output.length) {

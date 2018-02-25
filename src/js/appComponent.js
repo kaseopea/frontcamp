@@ -21,6 +21,7 @@ class App extends Component {
         this.addPlipHandler = this.addPlipHandler.bind(this);
         this.filterPlips = this.filterPlips.bind(this);
         this.resetFilter = this.resetFilter.bind(this);
+        this.removePlipHandler = this.removePlipHandler.bind(this);
 
     }
 
@@ -51,13 +52,20 @@ class App extends Component {
         });
     }
 
+    removePlipHandler(plipId) {
+        PlipService.removePlip(plipId);
+        this.setState({
+            plips: PlipService.getPlips()
+        });
+    }
+
     render() {
         return (
             <div className="app">
                 <header className="app-header">
                     <div className="pure-g">
                         <div className="pure-u-1-2">
-                            <h1 className="app-title" onClick={this.resetFilter}>PliP-PloP</h1>
+                            <button className="app-title" onClick={this.resetFilter}>PliP-PloP</button>
                         </div>
                         <div className="pure-u-1-2">
                             <AddPlip author={this.state.activeAuthor} onAddPlipSubmit={this.addPlipHandler}/>
@@ -69,7 +77,8 @@ class App extends Component {
                     <div className="pure-u-2-3">
                         <PlipsList plips={this.state.plips}
                                    onReset={this.resetFilter}
-                                   sortOrder={this.state.plipsSortOrder}/>
+                                   sortOrder={this.state.plipsSortOrder}
+                                   unplipHandler={this.removePlipHandler}/>
                     </div>
                     <div className="pure-u-1-3">
                         <PlipAuthorFilter onFilter={this.filterPlips}/>
