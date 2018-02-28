@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../scss/style.scss';
 
 import AddPlip from './components/AddPlip/AddPlip';
 import PlipsList from './components/PlipList/PlipsList';

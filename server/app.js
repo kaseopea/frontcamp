@@ -8,7 +8,7 @@ const errorHandlingMiddleware = require('./src/errorHandlingMiddleware/errorHand
 const passport = require('passport');
 const session = require("express-session");
 const LocalStrategy = require('passport-local').Strategy;
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = express();
 
