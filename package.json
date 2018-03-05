@@ -13,7 +13,6 @@
     "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors --progress",
     "build": "cross-env NODE_ENV=development npm run clean && cross-env NODE_ENV=development webpack  --colors --progress",
     "server": "nodemon ./server/app.js localhost 8080 --config nodemon.json"
-
   },
   "repository": {
     "type": "git",
@@ -76,6 +75,7 @@
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "winston": "^2.4.0"
   }
 }
