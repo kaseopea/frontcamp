@@ -76,9 +76,6 @@ const browserConfig = {
                     },
                     {
                         loader: 'json-loader'
-                    },
-                    {
-                        loader: './plugins/webpack-remove-number-attrs-loader'
                     }
                 ]
             },

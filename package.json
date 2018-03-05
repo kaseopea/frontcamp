@@ -4,7 +4,6 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
-    "prestart": "cpx \"plugins/**/*\" node_modules",
     "start": "cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --color --client-log-level \"error\"",
     "clean": "rimraf dist",
     "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors --progress",
