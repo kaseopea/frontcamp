@@ -1,30 +1,21 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OPTIONS = require('./options');
-
-const IS_DEV_MODE = (process.env.NODE_ENV === 'development');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const IS_PROD_MODE = (process.env.NODE_ENV === 'prod');
 
 /* ---------------------------------- STYLES ---------------------------------- */
 const extractSASSPlugin = new ExtractTextPlugin({
-    filename: 'style-[hash].css'
-});
-
-/* ---------------------------------- INDEX PAGE ---------------------------------- */
-const IndexPagePlugin = new HtmlWebpackPlugin({
-    template: './src/index.html',
-    excludeChunks: ['viewer']
+    filename: 'style.css'
 });
 
 /* ---------------------------------- MAIN CONFIG ---------------------------------- */
-module.exports = {
+const config = {
     entry: {
-        app: './src/js/index.js',
+        bundle: './src/client/index.js',
         vendor: ['babel-polyfill', 'whatwg-fetch']
     },
     output: {
-        path: OPTIONS.distPath,
-        filename: '[name]-[hash].js'
+        path: OPTIONS.publicPath,
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -38,20 +29,20 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            minimize: !IS_DEV_MODE,
-                            sourceMap: IS_DEV_MODE
+                            minimize: IS_PROD_MODE,
+                            sourceMap: !IS_PROD_MODE
                         }
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: IS_DEV_MODE
+                            sourceMap: !IS_PROD_MODE
                         }
                     },
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: IS_DEV_MODE
+                            sourceMap: !IS_PROD_MODE
                         }
                     }
                 ])
@@ -81,9 +72,39 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|svg|ico)$/,
-                use: 'file-loader?name=assets/[name].[ext]&publicPath=./'
+                use:[
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/[name].[ext]',
+                            publicPath: './'
+                        }
+                    }
+                ]
             }
         ]
     },
-    plugins: [IndexPagePlugin, extractSASSPlugin]
+    plugins: [extractSASSPlugin]
 };
+
+/* ---------------------------------- PROD & DEV MODE EXTRAS ---------------------------------- */
+if (IS_PROD_MODE) {
+    /* Uglify in Production Mode  */
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        }
+    }));
+} else {
+    /* DEV SERVER CONFIG */
+    const devServerConfig = {
+        contentBase: OPTIONS.serverBuildPath,
+        port: 9000,
+        open: true
+        // stats: 'errors-only'
+    };
+    config.devServer = devServerConfig;
+    config.devtool = 'cheap-module-source-map';
+}
+
+module.exports = config;

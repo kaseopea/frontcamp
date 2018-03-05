@@ -4,13 +4,16 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:build-server": "webpack --config webpack.server.js --watch",
+    "dev:build-client": "webpack --config webpack.client.js --watch",
     "start": "cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --color --client-log-level \"error\"",
-    "clean": "rimraf dist",
+    "clean": "rimraf public",
     "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors --progress",
     "build": "cross-env NODE_ENV=development npm run clean && cross-env NODE_ENV=development webpack  --colors --progress",
-    "server": "nodemon ./server/app.js localhost 8080 --config nodemon.json",
-    "ssr": "cross-env NODE_ENV=development nodemon ./public/server.js localhost 8080 --config nodemon.json && cross-env NODE_ENV=development webpack  --colors --progress",
-    "webp": "webpack"
+    "server": "nodemon ./server/app.js localhost 8080 --config nodemon.json"
+
   },
   "repository": {
     "type": "git",
@@ -52,6 +55,7 @@
     "jscs": "^3.0.7",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.11",
+    "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
