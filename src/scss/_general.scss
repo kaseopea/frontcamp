@@ -4,20 +4,13 @@
     General styles
  */
 html {
-    font-size: 10px;
-    line-height: 1.25;
     -webkit-font-smoothing: antialiased;
 }
 
 body {
     margin: 0;
     padding: 0;
-
-    background-color: $main-background-color;
-    background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
-
     font-family: $main-font;
-    font-size: 1.6rem;
 }
 
 /* Clearfix */
@@ -44,3 +37,11 @@ body {
 }
 
 /* close commented backslash hack */
+
+.required {
+    &:after {
+        content: '*';
+        color: red;
+        font-weight: bold;
+    }
+}

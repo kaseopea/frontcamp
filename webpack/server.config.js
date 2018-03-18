@@ -4,7 +4,13 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
     target: 'node',
     externals: [nodeExternals()],
-    entry: './src/server/index.js',
+    node: {
+        console: false,
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    },
+    entry: './server/app.js',
     output: {
         path: OPTIONS.serverBuildPath,
         filename: 'bundle.js'
@@ -15,10 +21,6 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components|dist)/,
                 use: 'babel-loader'
-            },
-            {
-                test: /\.scss/,
-                loader: 'css-loader!sass-loader'
             }
         ]
     }

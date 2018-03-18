@@ -6,8 +6,8 @@
   "db": {
     "prefix": "rusau_",
     "posts": {
-      "modelName": "post",
-      "collectionName": "posts",
+      "modelName": "plips",
+      "collectionName": "plips",
       "connection": "mongodb://localhost/rusau_blogs"
     },
     "users": {

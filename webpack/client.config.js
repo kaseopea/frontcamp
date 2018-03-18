@@ -1,17 +1,24 @@
 const OPTIONS = require('./options');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const IS_PROD_MODE = (process.env.NODE_ENV === 'prod');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /* ---------------------------------- STYLES ---------------------------------- */
 const extractSASSPlugin = new ExtractTextPlugin({
     filename: 'style.css'
 });
 
+/* ---------------------------------- INDEX PAGE ---------------------------------- */
+const IndexPagePlugin = new HtmlWebpackPlugin({
+    template: './src/index.html',
+    excludeChunks: ['viewer']
+});
+
 /* ---------------------------------- MAIN CONFIG ---------------------------------- */
 const config = {
     entry: {
-        bundle: './src/client/index.js',
-        vendor: ['babel-polyfill', 'whatwg-fetch']
+        bundle: './src/app/index.js',
+        vendor: ['babel-polyfill', 'whatwg-fetch', 'jquery', 'popper.js', 'bootstrap']
     },
     output: {
         path: OPTIONS.publicPath,
@@ -84,7 +91,7 @@ const config = {
             }
         ]
     },
-    plugins: [extractSASSPlugin]
+    plugins: [IndexPagePlugin, extractSASSPlugin]
 };
 
 /* ---------------------------------- PROD & DEV MODE EXTRAS ---------------------------------- */
