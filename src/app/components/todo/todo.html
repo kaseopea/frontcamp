@@ -1,0 +1,15 @@
+<manage-todo on-add="$ctrl.addTodoHandler"
+             on-update="$ctrl.updateTodoHandler"
+             update-todo="$ctrl.activeTodo"></manage-todo>
+<hr>
+
+<div class="row">
+    <div class="col-sm">
+        <h3>Incomplete</h3>
+        <todos-list todos="$ctrl.todosIncompleted" filter="" class="todos-list todo-list-uncompleted"></todos-list>
+    </div>
+    <div class="col-sm">
+        <h3>Completed</h3>
+        <todos-list todos="$ctrl.todosCompleted" filter="" class="todos-list todo-list-completed"></todos-list>
+    </div>
+</div>

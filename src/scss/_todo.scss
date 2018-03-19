@@ -3,4 +3,23 @@
     .todo {
         margin-bottom: 10px;
     }
+
+    &.todo-list-uncompleted {
+        .todo .card-title {
+            font-size: 1.4rem;
+        }
+    }
+
+    &.todo-list-completed {
+        .todo {
+            background-color: #eee;
+
+            .card-title {
+                font-size: 1.4rem;
+                color: #ccc;
+                text-decoration: line-through;
+                margin: 0;
+            }
+        }
+    }
 }

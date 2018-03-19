@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span ng-if="$ctrl.updateTodo">Update todo</span>
+            <span ng-if="!$ctrl.updateTodo">Add todo</span>
+        </h5>
+        <form ng-submit="$ctrl.submitHandler()">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" ng-model="$ctrl.todo.text"
+                           class="form-control required"
+                           placeholder="Todo description"/>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">
+                        <span ng-if="$ctrl.updateTodo">Update</span>
+                        <span ng-if="!$ctrl.updateTodo">Add</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

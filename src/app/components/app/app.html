@@ -1,29 +1,19 @@
-<div class="container app">
-    <div class="app-header">
-        <h1>Amazing Todo App</h1>
-    </div>
-    {{ vm.test }}
-    <div ui-view></div>
-    <div>
-        <div class="container">
-            <manage-todo add-todo-handler="addTodoHandler"
-                         update-todo-handler="updateTodoHandler"
-                         update-todo="activeTodo"></manage-todo>
-            <hr>
-
-            <div ui-view></div>
-
-            <div class="row">
-                <div class="col-sm">
-                    <h3>Incomplete</h3>
-                    <todos-list todos="todosIncompleted" filter="'стоп'" class="todos-list todo-list-uncompleted"></todos-list>
-                </div>
-                <div class="col-sm">
-                    <h3>Completed</h3>
-                    <todos-list todos="todosCompleted" filter="'три'" class="todos-list todo-list-completed"></todos-list>
-                </div>
-            </div>
+<header class="header">
+    <div class="container">
+        <div class="app-header text-center">
+            <h1>Amazing Todo App</h1>
         </div>
-
     </div>
-</div>
+</header>
+<hr>
+<main class="main">
+    <div class="container app">
+        <ui-view></ui-view>
+    </div>
+</main>
+<hr>
+<footer class="footer">
+    <div class="container">
+        <p class="text-center">2018 @ All rights reserved.</p>
+    </div>
+</footer>

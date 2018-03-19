@@ -11,11 +11,6 @@ class TodoCtrl {
 
         $scope.addTodoHandler = this.addTodo;
         $scope.updateTodoHandler = this.updateTodo.bind(this);
-        this.init();
-
-    }
-
-    init() {
 
     }
 
@@ -33,6 +28,8 @@ class TodoCtrl {
     completeTodo() {
         console.warn('completeTodo');
     }
+
+
 }
 
 export default angular.module(TodoApp).controller('TodoCtrl', TodoCtrl);

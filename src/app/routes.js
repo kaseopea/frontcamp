@@ -1,24 +1,38 @@
-export default routesConfig;
-
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
-  // $locationProvider.html5Mode(true);
-  $locationProvider.html5Mode(true).hashPrefix('!');
+    // $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
-  $stateProvider
-    .state('app', {
-      url: '/',
-      component: 'app'
-    });
-    // .state('app.about', {
-    //   url: 'about',
-    //   component: 'about'
-    // })
-    // .state('app.dashboard', {
-    //   url: 'dashboard',
-    //   component: 'dashboard'
-    // })
+    $stateProvider
+        .state('todo', {
+            abstract: true,
+            url: '/',
+            component: 'app'
+        })
+        .state('todo.all', {
+            url: '',
+            component: 'todo',
+            resolve: {
+                filter: () => 'all'
+            }
+        })
+        .state('todo.active', {
+            url: 'active',
+            component: 'todo',
+            resolve: {
+                filter: () => 'active'
+            }
+        })
+        .state('todo.completed', {
+            url: 'completed',
+            component: 'todo',
+            resolve: {
+                filter: () => 'completed'
+            }
+        });
 
-  $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
 }
+
+export default routesConfig;
