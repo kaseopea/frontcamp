@@ -23,7 +23,7 @@ class App extends Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             plips: PlipService.getPlips()
         });

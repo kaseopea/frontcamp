@@ -9,7 +9,7 @@ class PlipAuthorFilter extends Component {
         this.authorsList = null;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.authorsList = this.authors.map(author => (<AuthorItem key={author.id} author={author} {...this.props}/>));
     }
 

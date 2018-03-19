@@ -1,4 +1,4 @@
 export default {
-    "appName": "Amazing app",
+    "appName": "Static React Server",
     "appPort": 8090
 }
