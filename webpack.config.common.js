@@ -105,7 +105,7 @@ const serverConfig = {
     target: 'node',
     externals: [nodeExternals()],
     output: {
-        path: OPTIONS.publicPath,
+        path: OPTIONS.buildPath,
         filename: 'server.js',
         libraryTarget: 'commonjs2'
     },
