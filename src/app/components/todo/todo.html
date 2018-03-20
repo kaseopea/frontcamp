@@ -1,24 +1,47 @@
-<manage-todo on-add="$ctrl.addTodoHandler()"
+<manage-todo on-add="$ctrl.addTodoHandler"
              on-update="$ctrl.updateTodoHandler($ctrl.activeTodo)"
              active-todo="$ctrl.activeTodo"></manage-todo>
 <hr>
-{{$ctrl.activeTodo}}
+<div class="card">
+    <div class="card-body">
+        <form name="filterForm" novalidate ng-submit="$ctrl.submitHandler()" class="filterForm">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text"
+                           ng-model="$ctrl.filterByText"
+                           maxlength="1"
+                           class="form-control filter-text"/>
+                </div>
+                <div class="col">
+                    Show todos for <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" /> last days
+                </div>
+                <div class="col">
+                    <button>Reset Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr>
+[{{$ctrl.textFilter}}] - [{{$ctrl.dateFilter}}]
 <hr>
 
 <div class="row">
     <div class="col-sm">
-        <h3>Incomplete</h3>
+        <h5>Incomplete</h5>
         <div class="todos-list todo-list-uncompleted">
-            <todo-item ng-repeat="todoItem in $ctrl.todosIncompleted | orderBy:'-date'"
+            <todo-item
+                    ng-repeat="todoItem in $ctrl.todosIncompleted | startsWith:$ctrl.filterByText:'text' | orderBy:'-date'"
                        todo="todoItem"
                        edit-handler="$ctrl.editTodo(todoItem)"
                        complete-handler="$ctrl.completeTodo(todoItem.id)"></todo-item>
         </div>
     </div>
     <div class="col-sm">
-        <h3>Completed</h3>
+        <h5>Completed</h5>
         <div class="todos-list todo-list-completed">
-            <todo-item ng-repeat="todoItem in $ctrl.todosCompleted"
+            <todo-item ng-repeat="todoItem in $ctrl.todosCompleted | orderBy:'-date'"
                        todo="todoItem"
                        complete-handler="$ctrl.completeTodo(todoItem.id)"></todo-item>
         </div>

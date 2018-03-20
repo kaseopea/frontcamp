@@ -21,10 +21,10 @@ angular.element(document).ready(() => angular.bootstrap(document, [CONFIG.appNam
 
 angular
     .module(CONFIG.appName, [
+        uiBootstrap,
         uiRouter,
         ngAnimate,
         ngTouch,
-        uiBootstrap,
         commonModule,
         componentsModule,
         servicesModule,

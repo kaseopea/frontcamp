@@ -6,8 +6,7 @@ class Controller {
     constructor() {
         this.todo = {
             text: '',
-            completed: false,
-            date: null
+            completed: false
         };
     }
 
@@ -22,12 +21,7 @@ class Controller {
 
     submitHandler() {
         this.todo.date = new Date(Date.now());
-
-        if (this.activeTodo) {
-            this.onUpdate(this.todo);
-        } else {
-            this.onAdd(this.todo);
-        }
+        return  (this.activeTodo) ? this.onUpdate(this.todo) : this.onAdd()(this.todo);
     }
 }
 

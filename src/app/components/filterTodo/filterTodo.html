@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body">
+        <form name="filterForm" novalidate ng-submit="$ctrl.submitHandler()" class="filterForm">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text"
+                           name="filterText"
+                           ng-model="$ctrl.filterByText"
+                           class="form-control"
+                           placeholder="Text filter"/>
+
+                </div>
+                <div class="col">
+                    Show todos for <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" /> last days
+                </div>
+                <div class="col">
+                    <button>Reset Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

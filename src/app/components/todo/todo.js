@@ -9,6 +9,9 @@ class Controller {
         this.todosCompleted = null;
         this.getTodos();
 
+        this.textFilter = '';
+        this.dateFilter = null;
+
         this.addTodoHandler = this.addTodo.bind(this);
         this.updateTodoHandler = this.updateTodo.bind(this);
     }
@@ -19,7 +22,7 @@ class Controller {
     }
 
     addTodo(todo) {
-        console.warn(todo);
+        console.warn('addTodo', todo);
         // this.store.addTodo(todo);
         // this.getTodos();
     }
