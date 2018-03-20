@@ -7,7 +7,7 @@
     "start-dev": "npm-run-all --parallel dev:*",
     "dev:build": "cross-env NODE_ENV=development npm run clean && cross-env NODE_ENV=development webpack --colors",
     "dev:ssr": "cross-env NODE_ENV=development nodemon ./public/server.js --config nodemon.json ",
-    "dev:webpack": "cross-env NODE_ENV=development webpack --colors",
+    "dev:webpack": "cross-env NODE_ENV=development webpack --colors --watch",
     "clean": "rimraf public",
     "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors"
   },
@@ -51,6 +51,7 @@
     "jscs": "^3.0.7",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.11",
+    "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
@@ -64,6 +65,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "uuid": "^3.2.1"
   }
 }
