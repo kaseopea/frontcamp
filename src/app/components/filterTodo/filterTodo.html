@@ -1,20 +1,67 @@
 <div class="card">
     <div class="card-body">
-        <form name="filterForm" novalidate ng-submit="$ctrl.submitHandler()" class="filterForm">
+        <form name="filterForm" novalidate class="filterForm">
             <div class="form-row">
+
                 <div class="col">
                     <input type="text"
-                           name="filterText"
                            ng-model="$ctrl.filterByText"
-                           class="form-control"
-                           placeholder="Text filter"/>
+                           maxlength="1"
+                           class="form-control filter-text"/>
+                </div>
 
+                <div class="col-6">
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                       uib-datepicker-popup="{{$ctrl.datePickerOptions.format}}"
+                                       ng-model="$ctrl.filterByDate.from"
+                                       is-open="$ctrl.calendars.from.opened"
+                                       datepicker-options="$ctrl.datePickerOptions.dateOptions"
+                                       close-text="Close"
+                                       alt-input-formats="$ctrl.datePickerOptions.altInputFormats"/>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary"
+                                            type="button"
+                                            ng-click="$ctrl.toggleCalendar('from')">
+                                        <img src="assets/calendar.svg" class="calendar-icon"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                       uib-datepicker-popup="{{$ctrl.datePickerOptions.format}}"
+                                       ng-model="$ctrl.filterByDate.to"
+                                       is-open="$ctrl.calendars.to.opened"
+                                       datepicker-options="$ctrl.datePickerOptions.dateOptions"
+                                       close-text="Close"
+                                       alt-input-formats="$ctrl.datePickerOptions.altInputFormats"/>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary"
+                                            type="button"
+                                            ng-click="$ctrl.toggleCalendar('to')">
+                                        <img src="assets/calendar.svg" class="calendar-icon"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
+
                 <div class="col">
-                    Show todos for <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" /> last days
-                </div>
-                <div class="col">
-                    <button>Reset Filter</button>
+                    <button class="btn btn-light"
+                            ng-click="$ctrl.resetFilter()">Reset Filter</button>
                 </div>
             </div>
         </form>

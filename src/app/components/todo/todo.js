@@ -10,7 +10,10 @@ class Controller {
         this.getTodos();
 
         this.textFilter = '';
-        this.dateFilter = null;
+        this.dateFilter = {
+            from: new Date(Date.now()),
+            to: new Date(Date.now())
+        };
 
         this.addTodoHandler = this.addTodo.bind(this);
         this.updateTodoHandler = this.updateTodo.bind(this);
