@@ -1,20 +1,31 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            <span ng-if="$ctrl.updateTodo">Update todo</span>
-            <span ng-if="!$ctrl.updateTodo">Add todo</span>
+            <span ng-if="$ctrl.activeTodo">Update todo</span>
+            <span ng-if="!$ctrl.activeTodo">Add todo</span>
         </h5>
-        <form ng-submit="$ctrl.submitHandler()">
+        <form name="manageTodoForm" novalidate ng-submit="$ctrl.submitHandler()" class="manageTodoForm">
             <div class="form-row">
                 <div class="col">
-                    <input type="text" ng-model="$ctrl.todo.text"
+                    <input type="text"
+                           name="todoText"
+                           ng-model="$ctrl.todo.text"
                            class="form-control required"
-                           placeholder="Todo description"/>
+                           placeholder="Todo description"
+                           required
+                           minimal-length="20"/>
+                    <div class="validation-message"
+                         ng-show="manageTodoForm.todoText.$touched && manageTodoForm.todoText.$invalid">The todo text is required.</div>
+
+                    <div class="validation-message"
+                         ng-show="manageTodoForm.todoText.$dirty && manageTodoForm.todoText.$invalid" ng-message="minimal-length">
+                        Your name is too short!
+                    </div>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary">
-                        <span ng-if="$ctrl.updateTodo">Update</span>
-                        <span ng-if="!$ctrl.updateTodo">Add</span>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!manageTodoForm.todoText.$valid">
+                        <span ng-if="$ctrl.activeTodo">Update</span>
+                        <span ng-if="!$ctrl.activeTodo">Add</span>
                     </button>
                 </div>
             </div>

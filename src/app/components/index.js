@@ -3,7 +3,7 @@ import CONFIG from '../app.config';
 
 import appComponent from './app/app';
 import todoComponent from './todo/todo';
-import todosListComponent from './todosList/todosList';
+import todoItemComponent from './todoItem/todoItem';
 import manageTodoComponent from './manageTodo/manageTodo';
 
 export const componentsModule = CONFIG.appName.concat('.components');
@@ -13,4 +13,4 @@ angular
     .component('app', appComponent)
     .component('todo', todoComponent)
     .component('manageTodo', manageTodoComponent)
-    .component('todosList', todosListComponent);
+    .component('todoItem', todoItemComponent);

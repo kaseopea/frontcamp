@@ -1,0 +1,11 @@
+.manageTodoForm {
+  input.ng-invalid-required:not(.ng-untouched) {
+    border: 1px solid red;
+  }
+
+  .validation-message {
+    margin-top: 5px;
+    padding-left: 12px;
+    color: #666;
+  }
+}

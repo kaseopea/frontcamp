@@ -5,24 +5,28 @@ class Controller {
     /** @ngInject */
     constructor() {
         this.todo = {
-            text: 'Отдахнуть',
+            text: '',
             completed: false,
             date: null
         };
     }
 
+    $onChanges(changes) {
+        const activeTodo = (changes.activeTodo) ? changes.activeTodo.currentValue : null;
+        if (activeTodo) {
+            this.todo.text = activeTodo.text;
+            this.todo.id = activeTodo.id;
+            this.todo.completed = activeTodo.completed;
+        }
+    }
+
     submitHandler() {
         this.todo.date = new Date(Date.now());
 
-        if (this.updateTodo) {
-            this.onUpdate()(this.todo);
+        if (this.activeTodo) {
+            this.onUpdate(this.todo);
         } else {
-            // this.addTodoHandler()(this.todo);
-            this.onAdd({
-                $event: {
-                    todo: this.todo
-                }
-            });
+            this.onAdd(this.todo);
         }
     }
 }
@@ -30,7 +34,7 @@ class Controller {
 export default {
     template,
     bindings: {
-        updateTodo: '<',
+        activeTodo: '<',
         onAdd: '&',
         onUpdate: '&'
     },

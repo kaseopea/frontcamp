@@ -1,0 +1,11 @@
+<!-- ng-repeat="todo in vm.todos | filter: vm.filter | orderBy:'-date'" -->
+<div class="card todo">
+    <div class="card-body" >
+        <h2 class="card-title" ng-dblclick="$ctrl.editHandler()">
+            <input type="checkbox" ng-click="$ctrl.completeHandler()"> {{::$ctrl.todo.text}}
+        </h2>
+        <div ng-if="!$ctrl.todo.completed">
+            <p class="card-text">{{$ctrl.todo.date | todoDate}} | id: {{$ctrl.todo.id}}</p>
+        </div>
+    </div>
+</div>

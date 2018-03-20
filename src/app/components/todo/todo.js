@@ -9,30 +9,33 @@ class Controller {
         this.todosCompleted = null;
         this.getTodos();
 
-        // this.addTodoHandler = this.addTodo.bind(this);
+        this.addTodoHandler = this.addTodo.bind(this);
         this.updateTodoHandler = this.updateTodo.bind(this);
     }
 
-    $onChanges(changes) {
-        console.info(changes);
-    }
     getTodos() {
         this.todosIncompleted = this.store.getIncompletedTodos();
         this.todosCompleted = this.store.getCompletedTodos();
     }
 
-    addTodo($event) {
-        console.warn($event);
+    addTodo(todo) {
+        console.warn(todo);
         // this.store.addTodo(todo);
         // this.getTodos();
     }
 
-    updateTodo(data) {
-        console.warn('updateTodo', data);
+    updateTodo(todo) {
+        console.warn('updateTodo', todo);
     }
 
-    completeTodo() {
-        console.warn('completeTodo');
+    /* WORKING */
+    completeTodo(todoId) {
+        console.warn(`Completing Todo with ID: #${todoId}`);
+    }
+
+    editTodo(todo) {
+        this.activeTodo = todo;
+        console.warn(`Editing Todo with ID: #${todo.id}`);
     }
 }
 
