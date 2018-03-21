@@ -1,3 +1,4 @@
+import moment from 'moment';
 import template from './filterTodo.html';
 import './assets/calendar.svg';
 
@@ -18,8 +19,8 @@ class Controller {
             format: 'dd.MM.yyyy',
             dateOptions: {
                 formatYear: 'yy',
-                maxDate: new Date(2020, 5, 22),
-                minDate: new Date(),
+                maxDate: moment(),
+                minDate: moment().subtract(.5, 'years'),
                 startingDay: 1
             },
             altInputFormats: ['M!/d!/yyyy']
@@ -33,8 +34,8 @@ class Controller {
     resetFilter() {
         this.filterByText = '';
         this.filterByDate = {
-            from: new Date(Date.now()),
-            to: new Date(Date.now())
+            from: moment().subtract(.5, 'years'),
+            to: moment()
         };
     }
 

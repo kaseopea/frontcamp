@@ -1,3 +1,4 @@
+import moment from 'moment';
 import template from './todo.html';
 import TODO from '../../const/todoConst';
 
@@ -10,8 +11,8 @@ class Controller {
 
         this.textFilter = '';
         this.dateFilter = {
-            from: new Date(Date.now()),
-            to: new Date(Date.now())
+            from: moment().subtract(.5, 'years'),
+            to: moment()
         };
 
         this.addTodoHandler = this.addTodo.bind(this);
