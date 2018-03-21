@@ -5,8 +5,6 @@ class Controller {
     constructor(todoStore) {
         this.store = todoStore;
         this.activeTodo = null;
-        this.todosIncompleted = null;
-        this.todosCompleted = null;
         this.getTodos();
 
         this.textFilter = '';
@@ -25,9 +23,8 @@ class Controller {
     }
 
     addTodo(todo) {
-        console.warn('addTodo', todo);
-        // this.store.addTodo(todo);
-        // this.getTodos();
+        this.store.addTodo(todo);
+        this.getTodos();
     }
 
     updateTodo(todo) {
