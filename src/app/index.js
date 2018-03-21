@@ -2,7 +2,7 @@ import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
 import ngAnimate from 'angular-animate'
 import ngTouch from 'angular-touch'
-import uiBootstrap from 'angular-ui-bootstrap';
+import datePickerPopup from 'angular-ui-bootstrap-4/src/datepickerPopup';
 
 import CONFIG from './app.config';
 import {commonModule} from './common';
@@ -21,7 +21,7 @@ angular.element(document).ready(() => angular.bootstrap(document, [CONFIG.appNam
 
 angular
     .module(CONFIG.appName, [
-        uiBootstrap,
+        datePickerPopup,
         uiRouter,
         ngAnimate,
         ngTouch,

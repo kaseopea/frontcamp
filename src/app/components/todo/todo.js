@@ -1,4 +1,5 @@
 import template from './todo.html';
+import TODO from '../../const/todoConst';
 
 class Controller {
     /** @ngInject */
@@ -18,8 +19,8 @@ class Controller {
     }
 
     getTodos() {
-        this.todosIncompleted = this.store.getIncompletedTodos();
-        this.todosCompleted = this.store.getCompletedTodos();
+        this.todosIncompleted = this.store.getTodos(TODO.types.active);
+        this.todosCompleted = this.store.getTodos(TODO.types.completed);
     }
 
     addTodo(todo) {
@@ -28,17 +29,19 @@ class Controller {
     }
 
     updateTodo(todo) {
-        console.warn('updateTodo', todo);
+        this.store.updateTodo(todo);
+        this.getTodos();
+        this.activeTodo = null;
     }
 
-    /* WORKING */
     completeTodo(todoId) {
-        console.warn(`Completing Todo with ID: #${todoId}`);
+        this.store.completeTodo(todoId);
+        this.getTodos();
     }
 
     editTodo(todo) {
         this.activeTodo = todo;
-        console.warn(`Editing Todo with ID: #${todo.id}`);
+        this.getTodos();
     }
 }
 

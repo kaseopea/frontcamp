@@ -31,7 +31,7 @@ const config = {
                 use: 'html-loader',
             },
             {
-                test: /\.scss/,
+                test: /\.(s*)css/,
                 use: extractSASSPlugin.extract([
                     {
                         loader: 'css-loader',

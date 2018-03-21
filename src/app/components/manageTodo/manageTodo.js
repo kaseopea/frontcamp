@@ -4,6 +4,10 @@ import template from './manageTodo.html';
 class Controller {
     /** @ngInject */
     constructor() {
+        this.initTodo();
+    }
+
+    initTodo() {
         this.todo = {
             text: '',
             completed: false
@@ -21,7 +25,12 @@ class Controller {
 
     submitHandler() {
         this.todo.date = new Date(Date.now());
-        return  (this.activeTodo) ? this.onUpdate(this.todo) : this.onAdd()(this.todo);
+        if (this.activeTodo) {
+            this.onUpdate()(this.todo);
+        } else {
+            this.onAdd()(this.todo);
+        }
+        this.initTodo();
     }
 }
 
