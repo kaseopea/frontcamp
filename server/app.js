@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('public'));
 
 /* send todos */
-app.get('/todos.json', (req, res) => {
+app.get('/todos/all.json', (req, res) => {
     res.json(todosJson);
 });
 

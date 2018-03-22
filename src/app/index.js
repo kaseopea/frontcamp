@@ -1,7 +1,8 @@
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
-import ngAnimate from 'angular-animate'
-import ngTouch from 'angular-touch'
+import ngAnimate from 'angular-animate';
+import ngTouch from 'angular-touch';
+import ngResource from 'angular-resource';
 import datePickerPopup from 'angular-ui-bootstrap-4/src/datepickerPopup';
 
 import CONFIG from './app.config';
@@ -21,6 +22,7 @@ angular.element(document).ready(() => angular.bootstrap(document, [CONFIG.appNam
 
 angular
     .module(CONFIG.appName, [
+        ngResource,
         datePickerPopup,
         uiRouter,
         ngAnimate,

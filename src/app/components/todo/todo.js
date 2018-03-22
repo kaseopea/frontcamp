@@ -4,8 +4,8 @@ import TODO from '../../const/todoConst';
 
 class Controller {
     /** @ngInject */
-    constructor(todoStore) {
-        this.store = todoStore;
+    constructor(TodoStore, TodoResource) {
+        this.store = TodoStore;
         this.activeTodo = null;
         this.getTodos();
 
@@ -17,6 +17,9 @@ class Controller {
 
         this.addTodoHandler = this.addTodo.bind(this);
         this.updateTodoHandler = this.updateTodo.bind(this);
+
+        // get todos from $resource
+        TodoResource.get({}, (todos) => console.warn(todos));
     }
 
     getTodos() {
