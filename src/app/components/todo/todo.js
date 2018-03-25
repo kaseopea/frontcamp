@@ -4,7 +4,7 @@ import TODO from '../../const/todoConst';
 
 class Controller {
     /** @ngInject */
-    constructor(TodoStore, $state, TodoResource) {
+    constructor(TodoStore, $state) {
         this.store = TodoStore;
         this.$state = $state;
         this.activeTodo = null;
@@ -15,14 +15,12 @@ class Controller {
             from: moment().subtract(.5, 'years'),
             to: moment()
         };
-
-        // get todos from $resource
-        // TodoResource.get({}, (todos) => console.warn(todos));
     }
 
     $onInit() {
         this.todosActive = Controller.getListBasedOnFilter(this.todos, TODO.types.active);
         this.todosCompleted = Controller.getListBasedOnFilter(this.todos, TODO.types.completed);
+        this.todosResource = this.todosResource.todos;
     }
 
     completeTodo(todoId) {
@@ -51,7 +49,8 @@ class Controller {
 export default {
     template,
     bindings: {
-        todos: '<'
+        todos: '<',
+        todosResource: '<'
     },
     controller: Controller
 };

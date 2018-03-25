@@ -12,7 +12,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '',
             component: 'todo',
             resolve: {
-                todos: TodoStore => TodoStore.getTodos()
+                todos: TodoStore => TodoStore.getTodos(),
+                todosResource: TodoResource => TodoResource.get({}).$promise
             }
         })
         .state('todo.addTodo', {
