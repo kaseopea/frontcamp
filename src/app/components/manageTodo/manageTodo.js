@@ -3,43 +3,28 @@ import template from './manageTodo.html';
 
 class Controller {
     /** @ngInject */
-    constructor() {
-        this.initTodo();
-    }
-
-    initTodo() {
-        this.todo = {
+    constructor($state, TodoStore) {
+        this.store = TodoStore;
+        this.$state = $state;
+        this.activeTodo = $state.params.todo || {
             text: '',
             completed: false
         };
-    }
-
-    $onChanges(changes) {
-        const activeTodo = (changes.activeTodo) ? changes.activeTodo.currentValue : null;
-        if (activeTodo) {
-            this.todo.text = activeTodo.text;
-            this.todo.id = activeTodo.id;
-            this.todo.completed = activeTodo.completed;
-        }
+        this.isUpdate = !!$state.params.todo;
     }
 
     submitHandler() {
-        this.todo.date = new Date(Date.now());
-        if (this.activeTodo) {
-            this.onUpdate()(this.todo);
+        this.activeTodo.date = new Date(Date.now());
+        if (this.isUpdate) {
+            this.store.updateTodo(this.activeTodo);
         } else {
-            this.onAdd()(this.todo);
+            this.store.addTodo(this.activeTodo)
         }
-        this.initTodo();
+        this.$state.go('todo.list');
     }
 }
 
 export default {
     template,
-    bindings: {
-        activeTodo: '<',
-        onAdd: '&',
-        onUpdate: '&'
-    },
     controller: Controller
 };

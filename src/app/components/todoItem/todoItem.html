@@ -1,6 +1,6 @@
 <div class="card todo">
-    <div class="card-body" >
-        <h2 class="card-title" ng-dblclick="$ctrl.editHandler()">
+    <div class="card-body">
+        <h2 class="card-title" ng-dblclick="$ctrl.editHandler($ctrl.todo)">
             <input type="checkbox" ng-click="$ctrl.completeHandler()"> {{$ctrl.todo.text}}
         </h2>
         <div ng-if="!$ctrl.todo.completed">

@@ -1,7 +1,6 @@
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     // $locationProvider.html5Mode(true);
-    $locationProvider.html5Mode(true).hashPrefix('!');
 
     $stateProvider
         .state('todo', {
@@ -9,25 +8,22 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/',
             component: 'app'
         })
-        .state('todo.all', {
+        .state('todo.list', {
             url: '',
             component: 'todo',
             resolve: {
-                filter: () => 'all'
+                todos: TodoStore => TodoStore.getTodos()
             }
         })
-        .state('todo.active', {
-            url: 'active',
-            component: 'todo',
-            resolve: {
-                filter: () => 'active'
-            }
+        .state('todo.addTodo', {
+            url: 'add-todo',
+            component: 'manageTodo'
         })
-        .state('todo.completed', {
-            url: 'completed',
-            component: 'todo',
-            resolve: {
-                filter: () => 'completed'
+        .state('todo.updateTodo', {
+            url: 'edit-todo',
+            component: 'manageTodo',
+            params: {
+                todo: null
             }
         });
 

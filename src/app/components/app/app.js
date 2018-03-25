@@ -1,3 +1,5 @@
 import template from './app.html';
 
-export default {template};
+export default {
+    template
+};
