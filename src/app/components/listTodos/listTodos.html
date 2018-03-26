@@ -1,0 +1,5 @@
+<ul>
+    <li ng-repeat="todo in ::$ctrl.todos">{{::todo.text}}</li>
+</ul>
+<hr>
+<p class="text-success">Total: <span class="badge badge-success">{{::$ctrl.todos.length}} todos</span></p>
