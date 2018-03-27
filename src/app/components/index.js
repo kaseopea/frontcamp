@@ -6,6 +6,7 @@ import articlesComponent from './articles/articles';
 import articleItemComponent from './articleItem/articleItem';
 import manageArticleComponent from './manageArticle/manageArticle';
 import listArticlesComponent from './listArticles/listArticles';
+import paginationComponent from './pagination/pagination';
 
 export const componentsModule = CONFIG.appName.concat('.components');
 
@@ -15,4 +16,5 @@ angular
     .component('articles', articlesComponent)
     .component('manageArticle', manageArticleComponent)
     .component('articleItem', articleItemComponent)
-    .component('listArticles', listArticlesComponent);
+    .component('listArticles', listArticlesComponent)
+    .component('pagination', paginationComponent);

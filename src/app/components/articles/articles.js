@@ -8,6 +8,11 @@ class Controller {
         this.$state = $state;
         this.activeArticle = null;
         this.editArticleHandler = this.editArticle.bind(this);
+
+        /* Pagination */
+        this.currentPage = 1;
+        this.numPerPage = 3;
+
     }
 
     editArticle(article) {
