@@ -2,9 +2,13 @@
     <div class="col">
         <h1 class="display-4">Articles</h1>
 
-        <pagination></pagination>
+        {{ $ctrl.currentPage }}
+        <pagination
+                active-page="$ctrl.currentPage"
+                page-size="$ctrl.pageSize"
+        total-items="$ctrl.totalItems"></pagination>
 
-        <list-articles articles="$ctrl.articles" edit-handler="$ctrl.editArticleHandler"></list-articles>
+        <list-articles articles="$ctrl.articlesPaged" edit-handler="$ctrl.editArticleHandler"></list-articles>
 
     </div>
     <div class="col-3">
