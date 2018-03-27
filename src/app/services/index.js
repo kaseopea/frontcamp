@@ -1,13 +1,13 @@
 import angular from 'angular';
 import CONFIG from '../app.config';
 
-import TodoStore from './todoStore/todoStore';
-import TodoResource from './todoResource/todoResource';
+import ArticleStore from './articleStore/articleStore';
+import ArticlesResource from './articleResource/articlesResource';
 import uiRouterDebug from './uiRouterDebug/uiRouterDebug';
 
 export const servicesModule = CONFIG.appName.concat('.services');
 
 angular.module(servicesModule, [])
-    .service('TodoStore', TodoStore)
+    .service('ArticleStore', ArticleStore)
     .service('UiRouterDebug', uiRouterDebug)
-    .factory('TodoResource', TodoResource);
+    .factory('ArticlesResource', ArticlesResource);

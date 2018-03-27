@@ -1,14 +1,14 @@
 const express = require('express');
 const appConfig = require('./config.json');
-const todosJson = require('./mockData/todos.json');
+const articlesJson = require('./mockData/articles.json');
 const app = express();
 
 /* Setting alternative views directory */
 app.use(express.static('public'));
 
 /* send todos */
-app.get('/todos/all.json', (req, res) => {
-    res.json(todosJson);
+app.get('/articles/all.json', (req, res) => {
+    res.json(articlesJson);
 });
 
 /* uncaughtException error handling */

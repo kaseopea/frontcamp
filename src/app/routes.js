@@ -1,30 +1,30 @@
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 
     $stateProvider
-        .state('todo', {
+        .state('articles', {
             abstract: true,
             url: '/',
             component: 'app'
         })
-        .state('todo.list', {
+        .state('articles.list', {
             url: '',
-            component: 'todo',
+            component: 'articles',
             resolve: {
-                todos: TodoStore => TodoStore.getTodos(),
-                todosResource: TodoResource => TodoResource.get({}).$promise
+                articles: ArticleStore => ArticleStore.getArticles(),
+                articlesResource: ArticlesResource => ArticlesResource.get({}).$promise
             }
         })
-        .state('todo.addTodo', {
+        .state('articles.add', {
             url: 'add-todo',
-            component: 'manageTodo'
+            component: 'manageArticle'
         })
-        .state('todo.updateTodo', {
+        .state('articles.update', {
             url: 'edit-todo',
-            component: 'manageTodo',
+            component: 'manageArticle',
             params: {
-                todo: null
+                article: null
             }
         });
 

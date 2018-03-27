@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">Articles</h1>
+        <list-articles articles="$ctrl.articles" edit-handler="$ctrl.editArticleHandler"></list-articles>
+
+    </div>
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body text-center">
+                Start new day with <a ui-sref="articles.add" class="btn btn-primary">Add article</a>
+            </div>
+        </div>
+
+        <hr>
+        <h3>Top authors</h3>
+        <small class="text-muted">Loaded from $resource</small>
+        <ul>
+            <li ng-repeat="article in $ctrl.articlesResource.articles | limitTo: 5">{{article.author}}</li>
+        </ul>
+    </div>
+</div>
+

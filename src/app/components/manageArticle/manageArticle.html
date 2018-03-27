@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span ng-if="$ctrl.isUpdate">Update article</span>
+            <span ng-if="!$ctrl.isUpdate">Add article</span>
+        </h5>
+        <form name="manageArticleForm" novalidate ng-submit="$ctrl.submitHandler()" class="manageArticleForm">
+            <div class="form-group">
+                <label for="articleTitle">Title <span class="text-muted">(requred)</span></label>
+                <input ng-model="$ctrl.activeArticle.title"
+                       name="articleTitle"
+                       type="text"
+                       class="form-control"
+                       id="articleTitle"
+                       required
+                       placeholder="Enter article title">
+                <div class="validation-message text-danger"
+                     ng-show="manageArticleForm.articleTitle.$touched && manageArticleForm.articleTitle.$invalid">The Article title text is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="articleAuthor">Author</label>
+                <input ng-model="$ctrl.activeArticle.author"
+                       type="text"
+                       class="form-control"
+                       name="articleAuthor"
+                       id="articleAuthor"
+                       placeholder="Enter author name">
+            </div>
+
+            <div class="form-group">
+                <label for="articleText">Content <span class="text-muted">(requred)</span></label>
+                <textarea ng-model="$ctrl.activeArticle.text"
+                          class="form-control"
+                          name="articleText"
+                          id="articleText"
+                          required
+                          minimal-length="20"
+                          placeholder="Enter article content here"
+                          rows="5"></textarea>
+                <div class="validation-message text-danger"
+                     ng-show="manageArticleForm.articleText.$touched && manageArticleForm.articleText.$invalid">The Article content is required.</div>
+                <div class="validation-message text-danger"
+                     ng-show="manageArticleForm.articleText.$dirty && manageArticleForm.articleText.$invalid" ng-message="minimal-length">
+                    Your content is too short! Minimal length is 20 characters.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" ng-disabled="manageArticleForm.articleTitle.$invalid || manageArticleForm.articleText.$invalid">
+                <span ng-if="$ctrl.isUpdate">Update article</span>
+                <span ng-if="!$ctrl.isUpdate">Add article</span>
+            </button>
+
+            <button ui-sref="articles.list" class="btn btn-light">&laquo; Go back</button>
+
+        </form>
+    </div>
+</div>
