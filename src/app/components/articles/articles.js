@@ -29,6 +29,7 @@ class Controller {
         if (page < 1 || page > this.pager.totalPages) {
             return;
         }
+        this.currentPage = page;
         this.pager = this.paginationService.getPager(this.articles.length, page);
         this.articlesPaged = this.articles.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }

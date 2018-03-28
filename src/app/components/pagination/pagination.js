@@ -21,7 +21,7 @@ class Controller {
 export default {
     template,
     bindings:{
-        activePage: '=',
+        activePage: '<',
         pageSize: '<',
         totalItems: '<',
         setPage: '&'
