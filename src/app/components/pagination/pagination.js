@@ -12,10 +12,10 @@ class Controller {
         this.pager = this.paginationService.getPager(this.totalItems, this.activePage);
     }
 
-    /*setPage(page) {
+    setActivePage(page) {
         this.activePage = page;
-        console.warn(`Setting page to ${page} = `, this.activePage);
-    }*/
+        this.setPage({page})(page);
+    }
 }
 
 export default {

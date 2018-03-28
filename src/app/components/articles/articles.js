@@ -12,6 +12,7 @@ class Controller {
         this.currentPage = 1;
         this.activeArticle = null;
         this.editArticleHandler = this.editArticle.bind(this);
+        this.setPageHandler = this.setPage.bind(this);
     }
 
     $onInit() {

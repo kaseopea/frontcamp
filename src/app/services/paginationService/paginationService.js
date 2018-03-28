@@ -1,59 +1,68 @@
-// import _ from 'lodash';
-
 export default class PaginationService {
     constructor() {
         this.defaults = {
             currentPage: 1,
             pageSize: 3
         };
+        this.totalItems = 0;
+        this.currentPage = null;
+        this.pageSize = null;
+
+        this.totalPages = 0;
+        this.startPage = null;
+        this.endPage = null;
+        this.startIndex = null;
+        this.endIndex = null;
     }
 
-    getPager(totalItems, activePage, itemsPerPage) {
+    getPager(totalItems, currentPage, itemsPerPage) {
         // default to first page
-        const currentPage = activePage || this.defaults.currentPage;
-        const pageSize = itemsPerPage || this.defaults.pageSize;
-        let startPage = null;
-        let endPage = null;
+        this.currentPage = currentPage || this.defaults.currentPage;
+        this.pageSize = itemsPerPage || this.defaults.pageSize;
+        this.totalItems = totalItems;
 
         // calculate total pages
-        const totalPages = Math.ceil(totalItems / pageSize);
+        this.totalPages = this.getTotalPages();
 
-        if (totalPages <= 10) {
-            // less than 10 total pages so show all
-            startPage = 1;
-            endPage = totalPages;
-        } else {
-            // more than 10 total pages so calculate start and end pages
-            if (currentPage <= 6) {
-                startPage = 1;
-                endPage = 10;
-            } else if (currentPage + 4 >= totalPages) {
-                startPage = totalPages - 9;
-                endPage = totalPages;
-            } else {
-                startPage = currentPage - 5;
-                endPage = currentPage + 4;
-            }
-        }
-
-        // calculate start and end item indexes
-        let startIndex = (currentPage - 1) * pageSize;
-        let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-
-        // create an array of pages to ng-repeat in the pager control
-        // const pages = _.range(startPage, endPage + 1);
+        this.setStartEndPages();
+        this.setIndexes();
 
         // return object with all pager properties required by the view
         return {
-            totalItems,
-            currentPage,
-            pageSize,
-            totalPages,
-            startPage,
-            endPage,
-            startIndex,
-            endIndex
+            totalItems: this.totalItems,
+            currentPage: this.currentPage,
+            pageSize: this.pageSize,
+            totalPages: this.totalPages,
+            startPage: this.startPage,
+            endPage: this.endPage,
+            startIndex: this.startIndex,
+            endIndex: this.endIndex
         };
+    }
+
+    setStartEndPages() {
+        if (this.totalPages <= 10) {
+            this.startPage = 1;
+            this.endPage = this.totalPages;
+        } else if (this.currentPage <= 6) {
+            this.startPage = 1;
+            this.endPage = 10;
+        } else if (this.currentPage + 4 >= this.totalPages) {
+            this.startPage = this.totalPages - 9;
+            this.endPage = this.totalPages;
+        } else {
+            this.startPage = this.currentPage - 5;
+            this.endPage = this.currentPage + 4;
+        }
+    }
+
+    getTotalPages() {
+        return Math.ceil(this.totalItems / this.pageSize);
+    }
+
+    setIndexes() {
+        this.startIndex = (this.currentPage - 1) * this.pageSize;
+        this.endIndex = Math.min(this.startIndex + this.pageSize - 1, this.totalItems - 1);
     }
 
 }

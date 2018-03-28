@@ -1,15 +1,19 @@
 <div class="row">
     <div class="col">
         <h1 class="display-4">Articles</h1>
-
-        {{ $ctrl.currentPage }}
-        <pagination
+        <pagination class="pagination"
                 active-page="$ctrl.currentPage"
                 page-size="$ctrl.pageSize"
-                set-page="$ctrl.setPage"
-        total-items="$ctrl.totalItems"></pagination>
+                set-page="$ctrl.setPageHandler"
+                total-items="$ctrl.totalItems"></pagination>
 
         <list-articles articles="$ctrl.articlesPaged" edit-handler="$ctrl.editArticleHandler"></list-articles>
+
+        <pagination class="pagination"
+                    active-page="$ctrl.currentPage"
+                    page-size="$ctrl.pageSize"
+                    set-page="$ctrl.setPageHandler"
+                    total-items="$ctrl.totalItems"></pagination>
 
     </div>
     <div class="col-3">

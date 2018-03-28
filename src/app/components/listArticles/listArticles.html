@@ -1,7 +1,7 @@
 <article-item
-        ng-repeat="article in ::$ctrl.articles"
+        ng-repeat="article in $ctrl.articles"
         article="article"
         edit-handler="$ctrl.editHandler({article: article})(article)"></article-item>
 <p class="text-success">
-    Total: <span class="badge badge-success">{{::$ctrl.articles.length}} articles</span>
+    Total: <span class="badge badge-success">{{$ctrl.articles.length}} articles</span>
 </p>

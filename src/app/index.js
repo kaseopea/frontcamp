@@ -10,6 +10,7 @@ import {commonModule} from './common';
 import {componentsModule} from './components';
 import {servicesModule} from './services';
 import {directivesModule} from './directives';
+import {filtersModule} from './filters';
 
 import routesConfig from './routes';
 
@@ -29,6 +30,7 @@ angular
         commonModule,
         componentsModule,
         servicesModule,
-        directivesModule
+        directivesModule,
+        filtersModule
     ])
     .config(routesConfig);
