@@ -6,6 +6,7 @@
         <pagination
                 active-page="$ctrl.currentPage"
                 page-size="$ctrl.pageSize"
+                set-page="$ctrl.setPage"
         total-items="$ctrl.totalItems"></pagination>
 
         <list-articles articles="$ctrl.articlesPaged" edit-handler="$ctrl.editArticleHandler"></list-articles>

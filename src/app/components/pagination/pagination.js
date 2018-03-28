@@ -12,19 +12,19 @@ class Controller {
         this.pager = this.paginationService.getPager(this.totalItems, this.activePage);
     }
 
-    setPage(page) {
+    /*setPage(page) {
         this.activePage = page;
         console.warn(`Setting page to ${page} = `, this.activePage);
-    }
+    }*/
 }
 
 export default {
     template,
     bindings:{
-        activePage: '<',
+        activePage: '=',
         pageSize: '<',
         totalItems: '<',
-        onChange: '&'
+        setPage: '&'
     },
     controller: Controller
 };

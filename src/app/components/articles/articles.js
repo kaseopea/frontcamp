@@ -17,7 +17,7 @@ class Controller {
     $onInit() {
         /* Pagination */
         this.totalItems = this.articles.length;
-        this.articlesPaged = this.setPage(this.currentPage);
+        this.setPage(this.currentPage);
     }
 
     editArticle(article) {
@@ -29,7 +29,7 @@ class Controller {
             return;
         }
         this.pager = this.paginationService.getPager(this.articles.length, page);
-        return this.articles.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        this.articlesPaged = this.articles.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 }
 
