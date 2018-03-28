@@ -4,10 +4,11 @@
         <pagination class="pagination"
                 active-page="$ctrl.currentPage"
                 page-size="$ctrl.pageSize"
-                set-page="$ctrl.setPageHandler"
+                set-page="$ctrl.setPageHandler(page)"
                 total-items="$ctrl.totalItems"></pagination>
 
-        <list-articles articles="$ctrl.articlesPaged" edit-handler="$ctrl.editArticleHandler"></list-articles>
+        <list-articles articles="$ctrl.articlesPaged"
+                       edit-handler="$ctrl.editArticleHandler(article)"></list-articles>
 
         <pagination class="pagination"
                     active-page="$ctrl.currentPage"

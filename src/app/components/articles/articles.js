@@ -22,7 +22,9 @@ class Controller {
     }
 
     editArticle(article) {
-        this.$state.go('articles.update', {article});
+        if (article) {
+            this.$state.go('articles.update', {article});
+        }
     }
 
     setPage(page) {

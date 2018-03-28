@@ -14,7 +14,7 @@ class Controller {
 
     setActivePage(page) {
         this.activePage = page;
-        this.setPage({page})(page);
+        this.setPage({page});
     }
 }
 
