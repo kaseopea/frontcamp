@@ -1,9 +1,9 @@
 {
   "presets": [
+    "env",
     "react"
   ],
   "plugins": [
-    "process-env",
     "transform-class-properties"
   ]
 }

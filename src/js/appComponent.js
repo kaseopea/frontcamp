@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../scss/style.scss';
 
 import AddPlip from './components/AddPlip/AddPlip';
 import PlipsList from './components/PlipList/PlipsList';
@@ -22,7 +23,7 @@ class App extends Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             plips: PlipService.getPlips()
         });
