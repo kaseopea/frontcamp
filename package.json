@@ -4,6 +4,7 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm run dev:build",
     "start-dev": "npm-run-all --parallel dev:*",
     "dev:build": "cross-env NODE_ENV=development npm run clean && cross-env NODE_ENV=development webpack --colors",
     "dev:ssr": "cross-env NODE_ENV=development nodemon ./public/server.js --config nodemon.json ",
@@ -72,6 +73,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
+    "prop-types": "^15.6.1",
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

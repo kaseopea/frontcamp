@@ -1,0 +1,10 @@
+- var title = status + ' Error'
+- var heading = status + ' # ' + message
+
+html
+    head
+        title= title
+    body
+        h1= heading
+        if error.stack
+            p= error.stack
