@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 import uuid from 'uuid';
+import React, {Component} from 'react';
 
 class AddPlip extends Component {
 
@@ -12,7 +12,7 @@ class AddPlip extends Component {
     }
 
     submitHandler(event) {
-        const author = this.props.author;
+        const {author} = this.props;
         const plipContent = this.refs.plip.value;
 
         // todo: remove author from props
@@ -25,7 +25,7 @@ class AddPlip extends Component {
                     id: uuid.v4(),
                     date: new Date(Date.now()),
                     content: plipContent,
-                    author: author
+                    author
                 }
             }, () => this.props.onAddPlipSubmit(this.state.newPlip));
         }
@@ -35,7 +35,7 @@ class AddPlip extends Component {
     render() {
         return (
             <div className="add-plip">
-                <form className="pure-form" onSubmit={this.submitHandler.bind(this)}>
+                <form className="pure-form" onSubmit={() => this.submitHandler}>
 
                     <div>
                         <input type="text" ref="plip" placeholder="Plip text"/>
