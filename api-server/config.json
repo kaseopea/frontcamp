@@ -1,6 +1,6 @@
 {
   "appName": "Amazing app",
-  "appPort": 8080,
+  "appPort": 3030,
   "logFilename": "route-access.log",
   "secretKey": "secretsecretkey",
   "db": {
