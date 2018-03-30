@@ -1,16 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import authorPropType from '../../propTypes/authorPropType';
 
-class AuthorItem extends Component {
+const AuthorItem = props => (
+  <div className="author-item">
+    <span className="author-item-title">{props.author.firstName} {props.author.lastName}</span>
+    <button
+      className="button-secondary pure-button author-item-show-plips"
+      onClick={() => props.onFilter(props.author.username)}
+    >
+      Show plips
+    </button>
+  </div>
+);
 
-    render() {
-        const {author} = this.props;
-        return (
-            <div className="author-item">
-                <span className="author-item-title">{author.firstName} {author.lastName}</span>
-                <button className="button-secondary pure-button author-item-show-plips" onClick={this.props.onFilter.bind(this,author.username)}>Show plips</button>
-            </div>
-        );
-    }
-}
+AuthorItem.propTypes = {
+  author: PropTypes.shape(authorPropType).isRequired,
+  onFilter: PropTypes.func.isRequired
+};
 
 export default AuthorItem;

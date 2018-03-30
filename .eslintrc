@@ -1,8 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb",
-    "prettier"
+    "airbnb"
   ],
   "env": {
     "amd": true
@@ -22,7 +21,8 @@
         "props": false
       }
     ],
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
 

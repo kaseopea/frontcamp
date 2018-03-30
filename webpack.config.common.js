@@ -57,7 +57,7 @@ const browserConfig = {
                 ])
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components|dist)/,
                 use: 'babel-loader'
             },

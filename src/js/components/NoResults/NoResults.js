@@ -1,23 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class NoResults extends Component {
-    constructor(props) {
-        super(props);
-        this.showAllHandler = this.showAllHandler.bind(this);
-    }
+const NoResults = (props) => (
+  <div className="no-results">
+    <h2 className="no-results-title">Sorry, no results for this author</h2>
+    <button className="button-secondary pure-button no-results-btn" onClick={() => props.onShowAll()}>
+      Show all plips
+    </button>
+  </div>
+);
 
-    showAllHandler() {
-        this.props.onShowAll();
-    };
-
-    render() {
-        return (
-            <div className="no-results">
-                <h2 className="no-results-title">Sorry, no results for this author</h2>
-                <button className="button-secondary pure-button no-results-btn" onClick={this.showAllHandler}>Show all plips</button>
-            </div>
-        );
-    }
-}
+NoResults.propTypes = {
+  onShowAll: PropTypes.func.isRequired
+};
 
 export default NoResults;
