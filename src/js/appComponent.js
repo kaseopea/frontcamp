@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
 import '../scss/style.scss';
 
+import Home from './components/Home/Home';
 import AddPlip from './components/AddPlip/AddPlip';
-import PlipsList from './components/PlipList/PlipsList';
+
+import PlipView from './components/PlipView/PlipView';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 import PlipService from './services/PlipService';
 
@@ -17,78 +20,57 @@ class App extends Component {
     };
 
     this.addPlipHandler = this.addPlipHandler.bind(this);
-    this.filterPlips = this.filterPlips.bind(this);
-    this.removePlipHandler = this.removePlipHandler.bind(this);
-    this.resetFilterHandler = this.resetFilter.bind(this);
+    // this.filterPlips = this.filterPlips.bind(this);
   }
 
   componentDidMount() {
-    this.getAllPlips();
   }
-
-  /* Manage data */
-  getAllPlips = () => PlipService.getPlips().then(plips => this.setState({plips}));
 
   addPlipHandler(plip) {
     PlipService.addPlip(plip).then(() => this.getAllPlips());
   }
-  removePlipHandler(plipId) {
-    PlipService.removePlip(plipId).then(() => this.getAllPlips());
-  }
 
   /* Filtering Data */
-  filterPlips(username) {
-    this.setState({
-      plips:  PlipService.filterPlipsByAuthor(username)
-    });
-  }
-
-  resetFilter() {
-    return this.getAllPlips();
-  }
+  // filterPlips(username) {
+  //   this.setState({
+  //     plips: PlipService.filterPlipsByAuthor(username)
+  //   });
+  // }
 
 
   render() {
     return (
-      <div className="app">
-        <header className="app-header">
+        <div className="app">
+          <header className="app-header">
+            <div className="pure-g">
+              <div className="pure-u-1-2">
+                <Link to="/" className="app-title">PliP-PloP</Link>
+              </div>
+              <div className="pure-u-1-2">
+                <AddPlip
+                  author={this.state.activeAuthor}
+                  onAddPlip={this.addPlipHandler}
+                />
+              </div>
+            </div>
+          </header>
+
           <div className="pure-g">
-            <div className="pure-u-1-2">
-              <button className="app-title" onClick={this.resetFilterHandler}>PliP-PloP</button>
+            <div className="pure-u-2-3">
+              <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/plip/:plipId" component={PlipView}/>
+              </Switch>
             </div>
-            <div className="pure-u-1-2">
-              <AddPlip
-                author={this.state.activeAuthor}
-                onAddPlip={this.addPlipHandler}
-              />
+            <div className="pure-u-1-3">
+              <PlipAuthorFilter />
             </div>
           </div>
-        </header>
 
-        <div className="pure-g">
-          <div className="pure-u-2-3">
-
-            <PlipsList
-              plips={this.state.plips}
-              onReset={this.resetFilter}
-              sortOrder={this.state.plipsSortOrder}
-              unplipHandler={this.removePlipHandler}
-            />
-
-          </div>
-          <div className="pure-u-1-3">
-
-            <PlipAuthorFilter
-              onFilter={this.filterPlips}
-            />
-
-          </div>
+          <footer className="app-footer">
+            Plip-Plop&copy; 2018. No rights, nothing to reserve.
+          </footer>
         </div>
-
-        <footer className="app-footer">
-          Plip-Plop&copy; 2018. No rights, nothing to reserve.
-        </footer>
-      </div>
     );
   }
 }

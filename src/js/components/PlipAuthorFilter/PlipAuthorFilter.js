@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import AuthorItem from '../AuthorItem/AuthorItem';
 import AuthorService from '../../services/AuthorService';
 
 class PlipAuthorFilter extends Component {
-  static propTypes = {
-    onFilter: PropTypes.func.isRequired
-  };
-
   constructor(props) {
     super(props);
-    this.authors = AuthorService.getAuthors();
-    this.authorsList = null;
+    this.state = {
+      authors: null
+    };
   }
 
   componentDidMount() {
-    this.authorsList = this.authors.map(author => (
-      <AuthorItem key={author.id} author={author} {...this.props} />
-    ));
+    this.setState({
+      authors: AuthorService.getAuthors()
+    });
   }
 
   render() {
-    return (
-      <div className="plip-author-filter">
-        <h2 className="title">Топчик 10</h2>
-        {this.authorsList}
-      </div>
-    );
+    if (this.state.authors) {
+      return (
+        <div className="plip-author-filter">
+          <h2 className="title">Топчик 10</h2>
+          {this.state.authors.map(author => (
+            <AuthorItem key={author.id} author={author} {...this.props} />
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          Loading authors...
+        </div>
+      );
+    }
+
   }
 }
 

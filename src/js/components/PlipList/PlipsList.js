@@ -10,7 +10,6 @@ import plipPropType from '../../propTypes/plipPropType';
 class PlipsList extends Component {
   static propTypes = {
     plips: PropTypes.arrayOf(PropTypes.shape(plipPropType)),
-    onReset: PropTypes.func.isRequired,
     sortOrder: PropTypes.string,
     unplipHandler: PropTypes.func.isRequired,
   };
@@ -40,9 +39,7 @@ class PlipsList extends Component {
     let output = this.getData(this.props.plips);
     if (!output.length) {
       output = (
-        <NoResults
-          onShowAll={this.props.onReset}
-        />
+        <NoResults />
       );
     }
     return (

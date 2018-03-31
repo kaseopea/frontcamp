@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import authorPropType from '../../propTypes/authorPropType';
 
-const AuthorItem = props => (
-  <div className="author-item">
-    <span className="author-item-title">{props.author.firstName} {props.author.lastName}</span>
-    <button
-      className="button-secondary pure-button author-item-show-plips"
-      onClick={() => props.onFilter(props.author.username)}
-    >
-      Show plips
-    </button>
-  </div>
-);
+class AuthorItem extends Component {
+  static propTypes = {
+    author: PropTypes.shape(authorPropType).isRequired
+  };
 
-AuthorItem.propTypes = {
-  author: PropTypes.shape(authorPropType).isRequired,
-  onFilter: PropTypes.func.isRequired
-};
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+
+    return (
+      <div className="author-item">
+        <Link to={`/author/${this.props.author.username}`}>
+          <span className="author-item-title">{this.props.author.firstName} {this.props.author.lastName}</span>
+        </Link>
+      </div>
+    );
+  }
+}
 
 export default AuthorItem;

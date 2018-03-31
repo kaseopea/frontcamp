@@ -20,6 +20,18 @@ class PlipService {
       });
   }
 
+  getPlipById(plipId) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3030/plips/${plipId}`)
+          .then(res => {
+            this.plips = res.data;
+            resolve(this.plips);
+          })
+          .catch(err => reject(err));
+
+      });
+  }
+
   addPlip(plip) {
     return new Promise((resolve, reject) => {
       axios.post('http://localhost:3030/plips/', plip)
