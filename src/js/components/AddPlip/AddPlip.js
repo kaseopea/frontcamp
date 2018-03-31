@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import PropTypes from 'prop-types';
-
 
 class AddPlip extends Component {
   static propTypes = {
@@ -28,7 +26,6 @@ class AddPlip extends Component {
     const { author } = this.props;
 
     this.setState({
-      id: uuid.v4(),
       date: new Date(Date.now()),
       content: this.state.content,
       author

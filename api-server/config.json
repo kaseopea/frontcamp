@@ -14,6 +14,11 @@
       "modelName": "user",
       "collectionName": "users",
       "connection": "mongodb://localhost/rusau_blogs"
+    },
+    "plips": {
+      "modelName": "plips",
+      "collectionName": "plips",
+      "connection": "mongodb://localhost/rusau_blogs"
     }
   }
 }

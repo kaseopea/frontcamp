@@ -28,7 +28,7 @@ class PlipsList extends Component {
     return plipItems.map(plip => (
       <PlipItem
         className="plips-list-item"
-        key={plip.id}
+        key={plip._id}
         plip={plip}
         unplipHandler={this.props.unplipHandler}
         author={AuthorService.getAuthor(plip.author)}

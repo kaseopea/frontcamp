@@ -18,44 +18,35 @@ class App extends Component {
 
     this.addPlipHandler = this.addPlipHandler.bind(this);
     this.filterPlips = this.filterPlips.bind(this);
-    this.resetFilter = this.resetFilter.bind(this);
     this.removePlipHandler = this.removePlipHandler.bind(this);
-
+    this.resetFilterHandler = this.resetFilter.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      plips: PlipService.getPlips()
-    });
+    this.getAllPlips();
   }
+
+  /* Manage data */
+  getAllPlips = () => PlipService.getPlips().then(plips => this.setState({plips}));
 
   addPlipHandler(plip) {
-    PlipService.addPlip(plip);
-    this.setState({
-      plips: PlipService.getPlips()
-    });
+    PlipService.addPlip(plip).then(() => this.getAllPlips());
+  }
+  removePlipHandler(plipId) {
+    PlipService.removePlip(plipId).then(() => this.getAllPlips());
   }
 
+  /* Filtering Data */
   filterPlips(username) {
-    const authorPlips = PlipService.filterPlipsByAuthor(username);
     this.setState({
-      plips: authorPlips,
-      activeAuthor: username
+      plips:  PlipService.filterPlipsByAuthor(username)
     });
   }
 
   resetFilter() {
-    this.setState({
-      plips: PlipService.getPlips()
-    });
+    return this.getAllPlips();
   }
 
-  removePlipHandler(plipId) {
-    PlipService.removePlip(plipId);
-    this.setState({
-      plips: PlipService.getPlips()
-    });
-  }
 
   render() {
     return (
@@ -63,7 +54,7 @@ class App extends Component {
         <header className="app-header">
           <div className="pure-g">
             <div className="pure-u-1-2">
-              <button className="app-title" onClick={this.resetFilter}>PliP-PloP</button>
+              <button className="app-title" onClick={this.resetFilterHandler}>PliP-PloP</button>
             </div>
             <div className="pure-u-1-2">
               <AddPlip

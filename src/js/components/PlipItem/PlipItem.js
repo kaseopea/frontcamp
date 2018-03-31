@@ -17,8 +17,8 @@ const PlipItem = (props) => {
       </div>
       <div className="plip-item-content">
         <p className="text">&laquo;{plip.content}&raquo;</p>
-        <p className="date">{plip.date.toLocaleTimeString()}</p>
-        <button className="button-secondary pure-button" onClick={() => props.unplipHandler(plip.id)}>Unplip
+        <p className="date">{new Date(plip.date).toLocaleTimeString()}</p>
+        <button className="button-secondary pure-button" onClick={() => props.unplipHandler(plip._id)}>Unplip
         </button>
       </div>
     </div>
