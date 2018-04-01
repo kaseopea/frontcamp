@@ -12,6 +12,10 @@ class AuthorService {
     getAuthor(userName) {
         return this.authors.find(author => (author.username === userName));
     }
+
+    filterByUsername(plips, username) {
+        return plips.filter(plip => plip.author === username);
+    }
 }
 
 export default new AuthorService();

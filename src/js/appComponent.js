@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import AddPlip from './components/AddPlip/AddPlip';
 
 import PlipView from './components/PlipView/PlipView';
+import AuthorView from './components/AuthorView/AuthorView';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 import PlipService from './services/PlipService';
 
@@ -60,6 +61,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/plip/:plipId" component={PlipView}/>
+                <Route path="/author/:username" component={AuthorView}/>
               </Switch>
             </div>
             <div className="pure-u-1-3">
