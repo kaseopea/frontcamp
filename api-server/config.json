@@ -1,5 +1,5 @@
 {
-  "appName": "Amazing app",
+  "appName": "Server API",
   "appPort": 3030,
   "logFilename": "route-access.log",
   "secretKey": "secretsecretkey",

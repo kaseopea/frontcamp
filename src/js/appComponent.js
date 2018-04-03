@@ -9,6 +9,7 @@ import PlipView from './components/PlipView/PlipView';
 import AuthorView from './components/AuthorView/AuthorView';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 import PlipService from './services/PlipService';
+import DummyReduxComponent from './redux/redux';
 
 class App extends Component {
   constructor() {
@@ -58,6 +59,7 @@ class App extends Component {
 
           <div className="pure-g">
             <div className="pure-u-2-3">
+              <DummyReduxComponent />
               <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/plip/:plipId" component={PlipView}/>
