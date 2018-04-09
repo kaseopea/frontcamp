@@ -1,4 +1,6 @@
 import axios from 'axios';
+import qs from 'qs';
+import { getPlipsSuccess , getPlipByIdSuccess, addPlipSuccess, deletePlipSuccess} from '../redux/actions/PlipsActions';
 
 class PlipService {
   constructor() {
@@ -6,46 +8,57 @@ class PlipService {
   }
 
   getPlips() {
-      return new Promise((resolve, reject) => {
-        if (this.plips.length) {
-          resolve(this.plips);
-        }
-        axios.get('http://localhost:3030/plips/')
+    return async (dispatch) => {
+      if (this.plips.length) {
+        await dispatch(getPlipsSuccess(this.plips));
+      } else {
+        await axios({
+          method: 'GET',
+          url:'http://localhost:3030/plips/'
+        })
           .then(res => {
             this.plips = res.data;
-            resolve(this.plips);
+            dispatch(getPlipsSuccess(this.plips));
           })
-          .catch(err => reject(err));
-
-      });
+          .catch(err => console.error(err));
+      }
+    };
   }
 
   getPlipById(plipId) {
-      return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3030/plips/${plipId}`)
-          .then(res => {
-            this.plips = res.data;
-            resolve(this.plips);
-          })
-          .catch(err => reject(err));
-
-      });
+    return async (dispatch) => {
+      await axios({
+        method: 'GET',
+        url: `http://localhost:3030/plips/${plipId}`
+      })
+        .then(res =>  dispatch(getPlipByIdSuccess(res.data)))
+        .catch(err => console.error(err));
+    };
   }
 
   addPlip(plip) {
-    return new Promise((resolve, reject) => {
-      axios.post('http://localhost:3030/plips/', plip)
-        .then(res => resolve(res.data))
-        .catch(err => reject(err));
-    });
+    return async (dispatch) => {
+      await axios({
+        method: 'POST',
+        url: 'http://localhost:3030/plips/',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: qs.stringify(plip)
+      })
+        .then(res => dispatch(addPlipSuccess(res.data)))
+        .catch(err => console.error(err));
+    };
   }
 
   removePlip(plipId) {
-    return new Promise((resolve, reject) => {
-      axios.delete(`http://localhost:3030/plips/${plipId}`)
-        .then(res => resolve(res.data))
-        .catch(err => reject(err));
-    });
+    return async (dispatch) => {
+      await axios({
+        method: 'DELETE',
+        url: `http://localhost:3030/plips/${plipId}`,
+        data: qs.stringify(plipId)
+      })
+        .then(res => dispatch(deletePlipSuccess(res.data)))
+        .catch(err => console.error(err));
+    };
   }
 
   sortPlips(plips, sortOrder) {

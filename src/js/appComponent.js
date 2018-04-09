@@ -9,7 +9,11 @@ import PlipView from './components/PlipView/PlipView';
 import AuthorView from './components/AuthorView/AuthorView';
 import PlipAuthorFilter from './components/PlipAuthorFilter/PlipAuthorFilter';
 import PlipService from './services/PlipService';
-import DummyReduxComponent from './redux/redux';
+// import DummyReduxComponent from './redux/redux';
+
+import { renderRoutes } from 'react-router-config';
+import routes from './routes/routes';
+
 
 class App extends Component {
   constructor() {
@@ -22,7 +26,6 @@ class App extends Component {
     };
 
     this.addPlipHandler = this.addPlipHandler.bind(this);
-    // this.filterPlips = this.filterPlips.bind(this);
   }
 
   componentDidMount() {
@@ -31,14 +34,6 @@ class App extends Component {
   addPlipHandler(plip) {
     PlipService.addPlip(plip).then(() => this.getAllPlips());
   }
-
-  /* Filtering Data */
-  // filterPlips(username) {
-  //   this.setState({
-  //     plips: PlipService.filterPlipsByAuthor(username)
-  //   });
-  // }
-
 
   render() {
     return (
@@ -59,12 +54,9 @@ class App extends Component {
 
           <div className="pure-g">
             <div className="pure-u-2-3">
-              <DummyReduxComponent />
               <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/plip/:plipId" component={PlipView}/>
-                <Route path="/author/:username" component={AuthorView}/>
-              </Switch>
+                { renderRoutes(routes) }
+            </Switch>
             </div>
             <div className="pure-u-1-3">
               <PlipAuthorFilter />
