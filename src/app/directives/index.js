@@ -7,4 +7,5 @@ export const directivesModule = CONFIG.appName.concat('.directives');
 
 angular
     .module(directivesModule, [])
-    .directive('minimalLength', minLengthValidatorFn);
+    .directive('minimalLength', minLengthValidatorFn)
+  .name;

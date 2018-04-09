@@ -10,4 +10,5 @@ export const servicesModule = CONFIG.appName.concat('.services');
 angular.module(servicesModule, [])
     .service('ArticleStore', ArticleStore)
     .service('UiRouterDebug', uiRouterDebug)
-    .factory('ArticlesResource', ArticlesResource);
+    .factory('ArticlesResource', ArticlesResource)
+  .name;

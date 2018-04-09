@@ -4,5 +4,6 @@ import CONFIG from '../app.config';
 export const commonModule = CONFIG.appName.concat('.common');
 
 angular
-  .module(commonModule, []);
+  .module(commonModule, [])
+  .name;
 
