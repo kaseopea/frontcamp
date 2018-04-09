@@ -1,0 +1,20 @@
+<div class="btn-toolbar" role="toolbar" aria-label="Pagination">
+    <div class="btn-group mr-2" role="group" aria-label="Left group">
+        <button type="button"
+                ng-click="$ctrl.setActivePage($ctrl.pager.startPage)"
+                class="btn btn-secondary">&laquo;First</button>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Pages group">
+        <button ng-repeat="n in [] | range:$ctrl.pager.startPage:$ctrl.pager.endPage"
+                ng-disabled="n === $ctrl.activePage"
+                ng-click="$ctrl.setActivePage(n)"
+                type="button"
+                class="btn btn-secondary">{{n}}
+        </button>
+    </div>
+    <div class="btn-group" role="group" aria-label="Right group">
+        <button type="button"
+                ng-click="$ctrl.setActivePage($ctrl.pager.endPage)"
+                class="btn btn-secondary">Last &raquo;</button>
+    </div>
+</div>

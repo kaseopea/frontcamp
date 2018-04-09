@@ -1,7 +1,20 @@
 <div class="row">
     <div class="col">
         <h1 class="display-4">Articles</h1>
-        <list-articles articles="$ctrl.articles" edit-handler="$ctrl.editArticleHandler"></list-articles>
+        <pagination class="pagination"
+                active-page="$ctrl.currentPage"
+                page-size="$ctrl.pageSize"
+                set-page="$ctrl.setPageHandler(page)"
+                total-items="$ctrl.totalItems"></pagination>
+
+        <list-articles articles="$ctrl.articlesPaged"
+                       edit-handler="$ctrl.editArticleHandler(article)"></list-articles>
+
+        <pagination class="pagination"
+                    active-page="$ctrl.currentPage"
+                    page-size="$ctrl.pageSize"
+                    set-page="$ctrl.setPageHandler(page)"
+                    total-items="$ctrl.totalItems"></pagination>
 
     </div>
     <div class="col-3">
