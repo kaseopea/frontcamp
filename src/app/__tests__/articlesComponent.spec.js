@@ -1,13 +1,15 @@
 import uiRouter from '@uirouter/angularjs';
 import { Components } from '../components/index';
 import { Services } from '../services/index';
-import { mockArticles } from '../mockData/articlesMock';
+import DATA_MOCK from '../mockData/articlesMock';
 
 describe('Component: Articles', () => {
   beforeEach(angular.mock.module(Components, uiRouter, Services));
+
   let controller;
   let $state;
   let ArticleStore;
+  let PaginationService;
   const article = {
       id: 2,
       author: 'Keith Naughton',
@@ -16,25 +18,42 @@ describe('Component: Articles', () => {
       date: '2018-03-27T04:25:00Z'
     };
 
-  beforeEach(inject(($componentController, _$state_, _ArticleStore_) => {
+
+  beforeEach(inject(($componentController, _$state_, _ArticleStore_, _PaginationService_) => {
     $state = _$state_;
     ArticleStore = _ArticleStore_;
+    PaginationService = _PaginationService_;
+
     controller = $componentController('articles',
       {
         ArticleStore,
-        $state
+        $state,
+        PaginationService
       },
       {
-        articles: mockArticles
+        articles: DATA_MOCK
       }
     );
   }));
 
-  it('Controller', () => {
+  it('Controller: editArticle Handler', () => {
     $state.go = jest.fn();
     controller.editArticle(article);
     expect($state.go).toHaveBeenCalledWith("articles.update", {article});
   });
+
+
+  // it('Controller: setPage Handler', () => {
+  //   const totalItems = DATA_MOCK.length;
+  //   const activePage = 3;
+  //   PaginationService.getPager = jest.fn();
+  //
+  //   console.log('totalItems', totalItems);
+  //   console.log('activePage', activePage);
+  //
+  //   controller.setPage(activePage);
+  //   expect(PaginationService.getPager).toHaveBeenCalledWith(totalItems, activePage);
+  // });
 
 
 });

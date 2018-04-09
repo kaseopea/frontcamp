@@ -33,7 +33,9 @@ class Controller {
         }
         this.currentPage = page;
         this.pager = this.paginationService.getPager(this.articles.length, page);
-        this.articlesPaged = this.articles.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        if (this.pager) {
+          this.articlesPaged = this.articles.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        }
     }
 }
 

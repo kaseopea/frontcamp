@@ -24,6 +24,10 @@ export default class PaginationService {
         // calculate total pages
         this.totalPages = this.getTotalPages();
 
+        if (currentPage > this.totalPages) {
+            return null;
+        }
+
         this.setStartEndPages();
         this.setIndexes();
 
