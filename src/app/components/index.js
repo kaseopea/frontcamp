@@ -7,7 +7,6 @@ import articleItemComponent from './articleItem/articleItem';
 import manageArticleComponent from './manageArticle/manageArticle';
 import listArticlesComponent from './listArticles/listArticles';
 import paginationComponent from './pagination/pagination';
-
 export const componentsModule = CONFIG.appName.concat('.components');
 
 export const Components = angular
