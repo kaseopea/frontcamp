@@ -5,8 +5,8 @@ import datePickerPopup from 'angular-ui-bootstrap-4/src/datepickerPopup';
 
 import CONFIG from './app.config';
 import { commonModule } from './common';
-import { componentsModule } from './components';
-import { servicesModule } from './services';
+import { Components } from './components';
+import { Services } from './services';
 import { directivesModule } from './directives';
 
 import routesConfig from './routes';
@@ -23,7 +23,7 @@ export const AppMain = angular
     datePickerPopup,
     uiRouter,
     commonModule,
-    componentsModule,
-    servicesModule,
+    Components,
+    Services,
     directivesModule
   ]).config(routesConfig).name;

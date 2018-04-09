@@ -10,7 +10,7 @@
     "dev:build-client": "webpack --config webpack.client.js --watch",
     "clean": "rimraf public",
     "test": "jest --color",
-    "test-coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --color",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand"
   },

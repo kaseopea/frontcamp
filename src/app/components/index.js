@@ -1,5 +1,4 @@
 import angular from 'angular';
-// import uiRouter from '@uirouter/angularjs';
 import CONFIG from '../app.config';
 
 import appComponent from './app/app';
@@ -7,10 +6,10 @@ import articlesComponent from './articles/articles';
 import articleItemComponent from './articleItem/articleItem';
 import manageArticleComponent from './manageArticle/manageArticle';
 import listArticlesComponent from './listArticles/listArticles';
-
+// import { Services } from '../services/index';
 export const componentsModule = CONFIG.appName.concat('.components');
 
-export const ArticlesComponents = angular
+export const Components = angular
   .module(componentsModule, [])
     .component('app', appComponent)
     .component('articles', articlesComponent)
