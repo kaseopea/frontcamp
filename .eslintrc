@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb",
-    "prettier"
+    "prettier",
+    "plugin:jest/recommended"
   ],
   "env": {
     "amd": true
@@ -14,6 +15,11 @@
     "fetch": true
   },
   "rules": {
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
     "import/prefer-default-export": "off",
     "comma-dangle": 0,
     "no-param-reassign": [
