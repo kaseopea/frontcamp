@@ -23,7 +23,6 @@
       }
     ],
     "linebreak-style": ["error", "windows"]
-  }
+  },
+  "plugins": ["jest"]
 }
-
-// "linebreak-style": ["error", "windows"]
