@@ -1,7 +1,8 @@
-import { GET_PLIPS_LIST, DELETE_PLIP } from '../constants/constants';
+import { GET_PLIPS_LIST, DELETE_PLIP, GET_PLIP_BY_ID } from '../constants/constants';
 
 const initialState = {
-  plips: []
+  plips: [],
+  current: null
 };
 
 export default function plipsReducer(state = initialState, action) {
@@ -9,12 +10,17 @@ export default function plipsReducer(state = initialState, action) {
     case GET_PLIPS_LIST:
       return {
         ...state,
-        plips: action.payload
+        list: action.payload
       };
     case DELETE_PLIP:
       return {
         ...state,
         id: action.payload
+      };
+    case GET_PLIP_BY_ID:
+      return {
+        ...state,
+        current: action.payload
       };
     default:
       return state;

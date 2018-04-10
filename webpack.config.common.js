@@ -96,7 +96,7 @@ const browserConfig = {
             }
         ]
     },
-    plugins: [extractSASSPlugin]
+    plugins: [extractSASSPlugin, IndexPagePlugin]
 };
 // IndexPagePlugin
 

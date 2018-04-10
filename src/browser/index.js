@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { configureStore } from '../js/redux/store/configureStore';
-import App from '../js/appComponent';
+import { Provider } from 'react-redux';
+import configureStore from '../js/redux/store/configureStore';
+import routes from '../js/routes/routes';
+import { renderRoutes } from 'react-router-config';
 
 let preloadedState = {};
 // Grab the state from a global variable injected into the server-generated HTML
@@ -16,7 +18,7 @@ const store = configureStore(preloadedState);
 ReactDOM.hydrate((
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      { renderRoutes(routes) }
     </BrowserRouter>
   </Provider>
 ), document.getElementById('root'));

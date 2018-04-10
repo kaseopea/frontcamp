@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
-import PlipService from '../../services/PlipService';
+import { connect } from 'react-redux'
 import AuthorService from '../../services/AuthorService';
 import PlipsList from '../PlipList/PlipsList';
+import { loadPlips, removePlip } from "../../redux/actions/PlipsActions";
 
 class AuthorView extends Component {
-  constructor({match}) {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      username: match.params.username,
-      plips: null,
       plipsSortOrder: 'asc'
     };
   }
 
   componentDidMount() {
-    PlipService.getPlips().then(plips => {
-      const authorPlips = AuthorService.filterByUsername(plips, this.state.username);
-      this.setState({
-        plips: authorPlips
-      });
-    });
+    this.props.getAllPlips();
   }
 
   render() {
-    if (this.state.plips) {
+    const { plips = [], match } = this.props;
+    const authorPlips = AuthorService.filterByUsername(plips, match.params.username);
+    if (authorPlips) {
       return (
         <PlipsList
-          plips={this.state.plips}
+          plips={authorPlips}
           sortOrder={this.state.plipsSortOrder}
+          unplipHandler={id => this.props.removePlip(id)}
         />
       );
     } else {
@@ -38,4 +35,21 @@ class AuthorView extends Component {
   }
 }
 
-export default AuthorView;
+function mapStoreToProps(store) {
+  return {
+    plips: store.plips.list
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllPlips() {
+      dispatch(loadPlips());
+    },
+    removePlip(id) {
+      dispatch(removePlip(id));
+    },
+  };
+}
+
+export default connect(mapStoreToProps, mapDispatchToProps)(AuthorView);

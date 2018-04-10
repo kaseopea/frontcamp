@@ -1,36 +1,28 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import PlipItem from '../PlipItem/PlipItem';
-import PlipService from '../../services/PlipService';
 import AuthorService from '../../services/AuthorService';
+import { getPlipById } from "../../redux/actions/PlipsActions";
 
 class PlipView extends Component {
-  constructor({match}) {
-    super();
-    this.state = {
-      plipId: match.params.plipId,
-      plip: null
-    };
-  }
 
   componentDidMount() {
-    PlipService.getPlipById(this.state.plipId).then(plip => this.setState({plip}));
+    const { match, getPlipById } = this.props;
+    getPlipById(match.params.plipId);
   }
 
   render() {
-    if (this.state.plip) {
-      const {plip} = this.state;
+    const { plip } = this.props;
+    if (plip) {
       const author = AuthorService.getAuthor(plip.author);
       return (
         <div>
-          {this.plipId}
-          {this.state.plip ? (<PlipItem
+          <PlipItem
             className="plips-list-item"
             key={plip._id}
             plip={plip}
             author={author}
-          />) : null}
+          />
         </div>
       );
     } else {
@@ -41,4 +33,18 @@ class PlipView extends Component {
   }
 }
 
-export default PlipView;
+function mapStoreToProps(store) {
+  return {
+    plip: store.plips.current
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getPlipById(id) {
+      dispatch(getPlipById(id));
+    }
+  };
+}
+
+export default connect(mapStoreToProps, mapDispatchToProps)(PlipView);

@@ -4,7 +4,6 @@ import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes, matchRoutes } from 'react-router-config';
-import App from '../js/appComponent';
 import serverConfig from './config';
 import routes from '../js/routes/routes';
 
@@ -15,12 +14,15 @@ import configureStore from '../js/redux/store/configureStore';
 const app = express();
 
 /* Request Handler */
-const requestHandler = (req, res) => {
+const requestHandler = (req, res, next) => {
+
+  if (/\.(css|jpe?g|png|gif|svg|js)$/.test(req.url)) next();
+
   // Create a new Redux store instance
   const store = configureStore();
   const branch = matchRoutes(routes, req.path);
 
-  console.log(branch);
+  // console.log(branch);
 
   const promises = branch.map(({route}) => {
     const {fetchData} = route.component;
@@ -35,7 +37,6 @@ const requestHandler = (req, res) => {
       <Provider store={store}>
         <StaticRouter location={req.url} context={context}>
           {renderRoutes(routes)}
-          <App/>
         </StaticRouter>
       </Provider>
     );
@@ -59,18 +60,18 @@ function handleRender(res, preloadedState, html) {
         <html lang="en">
         <head>
             <title>React server rendering example</title>
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="/style.css">
             <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
             integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
         </head>
         <body>
             <div id="root">${html}</div>
-            <script src="vendor.js"></script>
-            <script src="app.js"></script>
+            <script src="/vendor.js"></script>
+            <script src="/app.js"></script>
              <script>
               // WARNING: See the following for security issues around embedding JSON in HTML:
               // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-              window.__PRELOADED_STATE__ = $\{JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
+              window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
             </script>
         </body>
         </html>

@@ -25,11 +25,14 @@ class AddPlip extends Component {
   submitHandler(event) {
     const { author } = this.props;
 
-    this.setState({
-      date: new Date(Date.now()),
-      content: this.state.content,
-      author
-    }, () => this.props.onAddPlip(this.state));
+    if (this.state.content.trim()) {
+      this.setState({
+        date: new Date(Date.now()),
+        content: this.state.content.trim(),
+        author
+      }, () => this.props.onAddPlip(this.state));
+      this.refs.plip.value = '';
+    }
 
     event.preventDefault();
   }

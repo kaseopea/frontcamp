@@ -1,38 +1,33 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PlipsList from '../PlipList/PlipsList';
-import PlipService from '../../services/PlipService';
+import { loadPlips, removePlip } from "../../redux/actions/PlipsActions";
+
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      plips: null
-    }
-    this.removePlipHandler = this.removePlipHandler.bind(this);
+      plipsSortOrder: 'asc'
+    };
   }
 
   componentDidMount() {
-    this.getAllPlips();
-  }
-
-  /* Manage data */
-  getAllPlips = () => PlipService.getPlips().then(plips => this.setState({plips}));
-
-  removePlipHandler(plipId) {
-    PlipService.removePlip(plipId).then(() => this.getAllPlips());
+    this.props.getAllPlips();
   }
 
   resetFilter() {
-    return this.getAllPlips();
+    return this.props.getAllPlips();
   }
 
   render() {
-    if (this.state.plips) {
+    const { plips } = this.props;
+    if (plips) {
       return (
         <PlipsList
-          plips={this.state.plips}
+          plips={plips}
           sortOrder={this.state.plipsSortOrder}
-          unplipHandler={this.removePlipHandler}
+          unplipHandler={id => this.props.removePlip(id)}
         />
       );
     } else {
@@ -43,4 +38,21 @@ class Home extends Component {
   }
 }
 
-export default Home;
+function mapStoreToProps(store) {
+  return {
+    plips: store.plips.list
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllPlips() {
+      dispatch(loadPlips());
+    },
+    removePlip(id) {
+      dispatch(removePlip(id));
+    },
+  };
+}
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Home);
