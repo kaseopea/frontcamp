@@ -1,10 +1,9 @@
-import React from 'react';
-import Enzyme, { shallow, render, mount } from 'enzyme';
+import { shallow, render, mount, configure } from 'enzyme';
 import 'raf-polyfill';
 import Adapter from 'enzyme-adapter-react-16';
 
 // React 16 Enzyme adapter
-Enzyme.configure({ adapter: new Adapter() });
+configure({ adapter: new Adapter() });
 
 // Make Enzyme functions available in all test files without importing
 global.shallow = shallow;
