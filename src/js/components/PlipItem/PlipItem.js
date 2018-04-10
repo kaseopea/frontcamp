@@ -3,8 +3,7 @@ import React, {Component} from 'react';
 class PlipItem extends Component {
 
     render() {
-        const plip = this.props.plip;
-        const author = this.props.author;
+        const {plip, author} = this.props;
         return (
             <div className="plip-item">
                 <div className="plip-item-avatar">
@@ -14,10 +13,8 @@ class PlipItem extends Component {
                 <div className="plip-item-content">
                     <p className="text">&laquo;{plip.content}&raquo;</p>
                     <p className="date">{plip.date.toLocaleTimeString()}</p>
-                    <button className="button-secondary pure-button" onClick={this.props.unplipHandler.bind(this, plip.id)}>Unplip</button>
+                    <button className="button-secondary pure-button" onClick={() => this.props.unplipHandler(plip.id)}>Unplip</button>
                 </div>
-
-
             </div>
         );
     }
