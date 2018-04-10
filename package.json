@@ -9,7 +9,11 @@
     "dev:ssr": "cross-env NODE_ENV=development nodemon ./public/server.js --config nodemon.json ",
     "dev:webpack": "cross-env NODE_ENV=development webpack --colors --watch",
     "clean": "rimraf public",
-    "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors"
+    "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors",
+    "test": "jest --color",
+    "test:coverage": "jest --coverage --color",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -29,6 +33,7 @@
     "autoprefixer": "^7.2.3",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
@@ -50,11 +55,14 @@
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.4.3",
     "jscs": "^3.0.7",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.11",
     "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.0.9",
+    "react-test-renderer": "^16.3.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
@@ -65,6 +73,9 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mongoose": "^5.0.3",
@@ -72,8 +83,10 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.4.0",
     "pug": "^2.0.0-rc.4",
+    "raf-polyfill": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "uuid": "^3.2.1",
     "winston": "^2.4.0"
   }
