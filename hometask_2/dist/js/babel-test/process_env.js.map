@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/js/babel-test/process_env.js"],"names":["appData","console","log","process","env"],"mappings":";;AAAA,IAAMA,qDAAN;;AAEAC,QAAQC,GAAR,CAAYC,QAAQC,GAApB","file":"process_env.js","sourcesContent":["const appData = process.env.APPDATA;\r\n\r\nconsole.log(process.env);"]}

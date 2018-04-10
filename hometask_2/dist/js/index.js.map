@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/js/index.js"],"names":["app","App","init"],"mappings":";;AAAA;AACA,IAAMA,MAAM,IAAIC,GAAJ,EAAZ;AACAD,IAAIE,IAAJ","file":"index.js","sourcesContent":["/* MAIN APP */\r\nconst app = new App();\r\napp.init();"]}

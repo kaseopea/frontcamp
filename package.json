@@ -4,7 +4,6 @@
   "description": "Frontcamp 3 Hometask 2 Babel",
   "main": "index.js",
   "scripts": {
-    "prestart": "cpx \"plugins/**/*\" node_modules",
     "start": "cross-env NODE_ENV=development node_modules/.bin/webpack-dev-server --color",
     "clean": "rimraf dist",
     "build-prod": "cross-env NODE_ENV=production npm run clean && cross-env NODE_ENV=production webpack --colors --progress",
@@ -34,7 +33,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "cpx": "^1.5.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "ejs": "^2.5.7",
